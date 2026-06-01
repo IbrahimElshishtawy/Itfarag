@@ -8,10 +8,7 @@ import '../shared/widgets/glass_card.dart';
 class MainLayout extends StatelessWidget {
   final Widget child;
 
-  const MainLayout({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const MainLayout({Key? key, required this.child}) : super(key: key);
 
   int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).matchedLocation;
@@ -47,6 +44,29 @@ class MainLayout extends StatelessWidget {
     }
   }
 
+  Widget _buildNavItem(int index, IconData icon, int selectedIndex, BuildContext context) {
+    final isSelected = index == selectedIndex;
+    return GestureDetector(
+      onTap: () => _onItemTapped(index, context),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: isSelected 
+              ? AppColors.primary.withOpacity(0.18) 
+              : Colors.transparent,
+        ),
+        child: Icon(
+          icon,
+          size: 22,
+          color: isSelected ? AppColors.primary : Colors.white70,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
@@ -55,55 +75,22 @@ class MainLayout extends StatelessWidget {
       extendBody: true,
       body: child,
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(left: 12, right: 12, bottom: 20),
+        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 22),
         child: GlassCard(
-          borderRadius: 24,
-          padding: EdgeInsets.zero,
-          fillOpacity: 0.1,
-          borderOpacity: 0.1,
-          child: NavigationBarTheme(
-            data: NavigationBarThemeData(
-              indicatorColor: AppColors.primary.withOpacity(0.2),
-              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-              iconTheme: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.selected)) {
-                  return const IconThemeData(color: AppColors.primary, size: 24);
-                }
-                return const IconThemeData(color: Colors.white60, size: 22);
-              }),
-            ),
-            child: NavigationBar(
-              selectedIndex: selectedIndex,
-              onDestinationSelected: (index) => _onItemTapped(index, context),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.home_filled),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.search_rounded),
-                  label: 'Search',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.play_circle_outline_rounded),
-                  label: 'Shorts',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.live_tv_rounded),
-                  label: 'Live',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.video_library_rounded),
-                  label: 'Library',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.person_rounded),
-                  label: 'Profile',
-                ),
-              ],
-            ),
+          borderRadius: 24, // Premium smooth corner curves
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          fillOpacity: 0.08,
+          borderOpacity: 0.15,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, Icons.home_filled, selectedIndex, context),
+              _buildNavItem(1, Icons.search_rounded, selectedIndex, context),
+              _buildNavItem(2, Icons.play_circle_outline_rounded, selectedIndex, context),
+              _buildNavItem(3, Icons.live_tv_rounded, selectedIndex, context),
+              _buildNavItem(4, Icons.video_library_rounded, selectedIndex, context),
+              _buildNavItem(5, Icons.person_rounded, selectedIndex, context),
+            ],
           ),
         ),
       ),

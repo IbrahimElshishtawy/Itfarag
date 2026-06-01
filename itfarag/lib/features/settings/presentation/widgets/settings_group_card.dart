@@ -33,60 +33,63 @@ class SettingsGroupCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       fillOpacity: isDark ? 0.15 : 0.45,
       borderOpacity: isDark ? 0.2 : 0.1,
-      child: Column(
-        children: [
-          SwitchListTile(
-            value: darkMode,
-            onChanged: onDarkModeChanged,
-            title: Text(
-              'Ultra Dark Theme Mode',
-              style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+      child: Material(
+        color: Colors.transparent,
+        child: Column(
+          children: [
+            SwitchListTile(
+              value: darkMode,
+              onChanged: onDarkModeChanged,
+              title: Text(
+                'Ultra Dark Theme Mode',
+                style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              subtitle: Text(
+                'Velvet midnight black interface style',
+                style: TextStyle(color: subTextColor, fontSize: 11),
+              ),
+              activeColor: AppColors.primary,
             ),
-            subtitle: Text(
-              'Velvet midnight black interface style',
-              style: TextStyle(color: subTextColor, fontSize: 11),
+            Divider(color: dividerColor, height: 16),
+            SwitchListTile(
+              value: dataSaver,
+              onChanged: onDataSaverChanged,
+              title: Text(
+                'Dynamic Data Saver Mode',
+                style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              subtitle: Text(
+                'Limits streams to 480p to reduce internet bills',
+                style: TextStyle(color: subTextColor, fontSize: 11),
+              ),
+              activeColor: AppColors.secondary,
             ),
-            activeColor: AppColors.primary,
-          ),
-          Divider(color: dividerColor, height: 16),
-          SwitchListTile(
-            value: dataSaver,
-            onChanged: onDataSaverChanged,
-            title: Text(
-              'Dynamic Data Saver Mode',
-              style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+            Divider(color: dividerColor, height: 16),
+            ListTile(
+              title: Text(
+                'Preferred Content Language',
+                style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              subtitle: Text(
+                'Current language: $selectedLanguage',
+                style: TextStyle(color: subTextColor, fontSize: 11),
+              ),
+              trailing: DropdownButton<String>(
+                dropdownColor: isDark ? AppColors.darkBackground : AppColors.lightSurface,
+                value: selectedLanguage,
+                underline: const SizedBox(),
+                icon: Icon(Icons.arrow_drop_down_rounded, color: textColor),
+                style: TextStyle(color: textColor, fontSize: 13, fontWeight: FontWeight.bold),
+                items: const [
+                  DropdownMenuItem(value: 'English', child: Text('English')),
+                  DropdownMenuItem(value: 'العربية', child: Text('العربية')),
+                  DropdownMenuItem(value: 'Français', child: Text('Français')),
+                ],
+                onChanged: onLanguageChanged,
+              ),
             ),
-            subtitle: Text(
-              'Limits streams to 480p to reduce internet bills',
-              style: TextStyle(color: subTextColor, fontSize: 11),
-            ),
-            activeColor: AppColors.secondary,
-          ),
-          Divider(color: dividerColor, height: 16),
-          ListTile(
-            title: Text(
-              'Preferred Content Language',
-              style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-            subtitle: Text(
-              'Current language: $selectedLanguage',
-              style: TextStyle(color: subTextColor, fontSize: 11),
-            ),
-            trailing: DropdownButton<String>(
-              dropdownColor: isDark ? AppColors.darkBackground : AppColors.lightSurface,
-              value: selectedLanguage,
-              underline: const SizedBox(),
-              icon: Icon(Icons.arrow_drop_down_rounded, color: textColor),
-              style: TextStyle(color: textColor, fontSize: 13, fontWeight: FontWeight.bold),
-              items: const [
-                DropdownMenuItem(value: 'English', child: Text('English')),
-                DropdownMenuItem(value: 'العربية', child: Text('العربية')),
-                DropdownMenuItem(value: 'Français', child: Text('Français')),
-              ],
-              onChanged: onLanguageChanged,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

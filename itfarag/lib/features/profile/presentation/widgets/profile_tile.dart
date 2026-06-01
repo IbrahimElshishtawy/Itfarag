@@ -18,16 +18,19 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 16,
-        backgroundColor: Colors.white.withOpacity(0.05),
-        child: Icon(icon, color: Colors.white70, size: 18),
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 16,
+          backgroundColor: Colors.white.withOpacity(0.05),
+          child: Icon(icon, color: Colors.white70, size: 18),
+        ),
+        title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+        subtitle: Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 11)),
+        trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30, size: 14),
+        onTap: onTap,
       ),
-      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 11)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30, size: 14),
-      onTap: onTap,
     );
   }
 }
