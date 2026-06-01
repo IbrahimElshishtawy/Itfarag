@@ -5,8 +5,7 @@ import 'package:video_player/video_player.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/live_player_card.dart';
 import '../widgets/live_broadcaster_row.dart';
-import '../widgets/live_chat_list.dart';
-import '../widgets/live_chat_input.dart';
+import '../widgets/live_chat_section.dart';
 
 class LivePage extends StatefulWidget {
   const LivePage({Key? key}) : super(key: key);
@@ -21,16 +20,6 @@ class _LivePageState extends State<LivePage> {
   bool _isPlaying = false;
   bool _isBuffering = false;
 
-  final List<String> _chatMessages = [
-    'Wow, the video stream looks incredibly crisp! 🔥',
-    'Best cyberpunk live stream in Flutter! 🦾',
-    'Greetings from Cairo! 🇪🇬',
-    'Is this using WebSockets? So fast!',
-  ];
-
-  final TextEditingController _commentController = TextEditingController();
-
-  // Stable public Tears of Steel HLS broadcast stream
   static const String _liveStreamUrl =
       'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8';
 
@@ -68,7 +57,6 @@ class _LivePageState extends State<LivePage> {
   void dispose() {
     _playerController.removeListener(_videoListener);
     _playerController.dispose();
-    _commentController.dispose();
     super.dispose();
   }
 
@@ -107,7 +95,6 @@ class _LivePageState extends State<LivePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Broadcast Player View Card
               LivePlayerCard(
                 isInitialized: _isInitialized,
                 isPlaying: _isPlaying,
@@ -115,35 +102,15 @@ class _LivePageState extends State<LivePage> {
                 controller: _playerController,
                 onTogglePlay: _togglePlay,
               ),
-
-              // Live Broadcaster Profile info
               LiveBroadcasterRow(
                 broadcasterName: 'Ahmed Esports Live Broadcast',
                 broadcastTitle: 'Playing Cyber City 2026',
                 avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60',
                 onSubscribe: () {},
               ),
-              
               Divider(color: dividerColor, height: 24, thickness: 1),
-
-              // Chat Message list
-              Expanded(
-                child: LiveChatList(
-                  chatMessages: _chatMessages,
-                ),
-              ),
-
-              // Input bar
-              LiveChatInput(
-                controller: _commentController,
-                onSendMessage: () {
-                  if (_commentController.text.isNotEmpty) {
-                    setState(() {
-                      _chatMessages.add(_commentController.text);
-                      _commentController.clear();
-                    });
-                  }
-                },
+              const Expanded(
+                child: LiveChatSection(),
               ),
             ],
           ),
