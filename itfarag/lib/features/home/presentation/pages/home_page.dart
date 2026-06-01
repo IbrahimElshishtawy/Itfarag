@@ -60,11 +60,17 @@ class _HomePageState extends State<HomePage> {
               ),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
+                  icon: const Icon(
+                    Icons.notifications_none_rounded,
+                    color: Colors.white,
+                  ),
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: const Icon(Icons.cast_connected_rounded, color: Colors.white),
+                  icon: const Icon(
+                    Icons.cast_connected_rounded,
+                    color: Colors.white,
+                  ),
                   onPressed: () {},
                 ),
               ],
@@ -180,7 +186,11 @@ class _HeroBanner extends StatelessWidget {
                     ),
                   ),
                   child: const Center(
-                    child: Icon(Icons.movie_creation_outlined, color: Colors.white24, size: 48),
+                    child: Icon(
+                      Icons.movie_creation_outlined,
+                      color: Colors.white24,
+                      size: 48,
+                    ),
                   ),
                 );
               },
@@ -198,77 +208,116 @@ class _HeroBanner extends StatelessWidget {
                 ),
               ),
               padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(4),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          'TRENDING',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Icon(
+                        Icons.stars_rounded,
+                        color: AppColors.secondary,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      const Text(
+                        'AI Best Choice',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.secondary,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: const Text('TRENDING', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
-                ),
-                const SizedBox(width: 8),
-                const Icon(Icons.stars_rounded, color: AppColors.secondary, size: 16),
-                const SizedBox(width: 4),
-                const Text('AI Best Choice', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.secondary)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'The Cyber Edge',
-              style: AppTypography.heading1.copyWith(color: Colors.white, fontSize: 32),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Action • Sci-Fi • Post-Apocalyptic',
-              style: AppTypography.bodySmall.copyWith(color: Colors.white70),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                  const SizedBox(height: 8),
+                  Text(
+                    'The Cyber Edge',
+                    style: AppTypography.heading1.copyWith(
+                      color: Colors.white,
+                      fontSize: 32,
                     ),
-                    icon: const Icon(Icons.play_arrow_rounded),
-                    label: const Text('Watch Now', style: TextStyle(fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      context.pushNamed(
-                        RouteNames.player,
-                        pathParameters: {'id': '101'},
-                      );
-                    },
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.white54, width: 1.5),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Action • Sci-Fi • Post-Apocalyptic',
+                    style: AppTypography.bodySmall.copyWith(
+                      color: Colors.white70,
                     ),
-                    icon: const Icon(Icons.info_outline_rounded),
-                    label: const Text('More Info'),
-                    onPressed: () {
-                      context.pushNamed(
-                        RouteNames.videoDetails,
-                        pathParameters: {'id': '101'},
-                      );
-                    },
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                          icon: const Icon(Icons.play_arrow_rounded),
+                          label: const Text(
+                            'Watch Now',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            context.pushNamed(
+                              RouteNames.player,
+                              pathParameters: {'id': '101'},
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            side: const BorderSide(
+                              color: Colors.white54,
+                              width: 1.5,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                          icon: const Icon(Icons.info_outline_rounded),
+                          label: const Text('More Info'),
+                          onPressed: () {
+                            context.pushNamed(
+                              RouteNames.videoDetails,
+                              pathParameters: {'id': '101'},
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -281,11 +330,8 @@ class _CategoryChip extends StatelessWidget {
   final String label;
   final bool isSelected;
 
-  const _CategoryChip({
-    Key? key,
-    required this.label,
-    required this.isSelected,
-  }) : super(key: key);
+  const _CategoryChip({Key? key, required this.label, required this.isSelected})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +351,9 @@ class _CategoryChip extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color: isSelected ? Colors.transparent : Colors.white.withOpacity(0.1),
+            color: isSelected
+                ? Colors.transparent
+                : Colors.white.withOpacity(0.1),
           ),
         ),
       ),
@@ -342,7 +390,11 @@ class _Section extends StatelessWidget {
                 style: AppTypography.heading3.copyWith(color: Colors.white),
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.white54),
+                icon: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                  color: Colors.white54,
+                ),
                 onPressed: () {},
               ),
             ],
@@ -374,7 +426,8 @@ class _Section extends StatelessWidget {
 class _ContinueWatchingCard extends StatelessWidget {
   final int index;
 
-  const _ContinueWatchingCard({Key? key, required this.index}) : super(key: key);
+  const _ContinueWatchingCard({Key? key, required this.index})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -382,12 +435,15 @@ class _ContinueWatchingCard extends StatelessWidget {
       'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&auto=format&fit=crop&q=60'
+      'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&auto=format&fit=crop&q=60',
     ];
 
     return GestureDetector(
       onTap: () {
-        context.pushNamed(RouteNames.player, pathParameters: {'id': '20$index'});
+        context.pushNamed(
+          RouteNames.player,
+          pathParameters: {'id': '20$index'},
+        );
       },
       child: Container(
         width: 180,
@@ -410,7 +466,11 @@ class _ContinueWatchingCard extends StatelessWidget {
                       ),
                     ),
                     child: const Center(
-                      child: Icon(Icons.movie_creation_outlined, color: Colors.white24, size: 28),
+                      child: Icon(
+                        Icons.movie_creation_outlined,
+                        color: Colors.white24,
+                        size: 28,
+                      ),
                     ),
                   );
                 },
@@ -430,7 +490,11 @@ class _ContinueWatchingCard extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 12,
                   backgroundColor: Colors.black54,
-                  child: Icon(Icons.play_arrow_rounded, color: Colors.white, size: 14),
+                  child: Icon(
+                    Icons.play_arrow_rounded,
+                    color: Colors.white,
+                    size: 14,
+                  ),
                 ),
               ),
               Positioned(
@@ -443,14 +507,24 @@ class _ContinueWatchingCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('Movie title', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white), maxLines: 1),
+                      const Text(
+                        'Movie title',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                      ),
                       const SizedBox(height: 4),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(2),
                         child: const LinearProgressIndicator(
                           value: 0.6,
                           backgroundColor: Colors.white24,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primary,
+                          ),
                           minHeight: 3,
                         ),
                       ),
@@ -470,11 +544,8 @@ class _MediaCard extends StatelessWidget {
   final int index;
   final bool isAISuggestion;
 
-  const _MediaCard({
-    Key? key,
-    required this.index,
-    this.isAISuggestion = false,
-  }) : super(key: key);
+  const _MediaCard({Key? key, required this.index, this.isAISuggestion = false})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -488,7 +559,10 @@ class _MediaCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        context.pushNamed(RouteNames.videoDetails, pathParameters: {'id': '30$index'});
+        context.pushNamed(
+          RouteNames.videoDetails,
+          pathParameters: {'id': '30$index'},
+        );
       },
       child: Container(
         width: 130,
@@ -515,7 +589,11 @@ class _MediaCard extends StatelessWidget {
                             ),
                           ),
                           child: const Center(
-                            child: Icon(Icons.movie_creation_outlined, color: Colors.white24, size: 24),
+                            child: Icon(
+                              Icons.movie_creation_outlined,
+                              color: Colors.white24,
+                              size: 24,
+                            ),
                           ),
                         );
                       },
@@ -526,13 +604,27 @@ class _MediaCard extends StatelessWidget {
                         left: 8,
                         child: GlassCard(
                           borderRadius: 6,
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 2,
+                          ),
                           fillOpacity: 0.3,
                           child: Row(
                             children: const [
-                              Icon(Icons.psychology, color: AppColors.secondary, size: 10),
+                              Icon(
+                                Icons.psychology,
+                                color: AppColors.secondary,
+                                size: 10,
+                              ),
                               SizedBox(width: 2),
-                              Text('98%', style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
+                              Text(
+                                '98%',
+                                style: TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -544,7 +636,11 @@ class _MediaCard extends StatelessWidget {
             const SizedBox(height: 8),
             const Text(
               'Show/Movie Name',
-              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
