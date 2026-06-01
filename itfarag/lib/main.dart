@@ -1,56 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movies_app/core/resources/app_router.dart';
-import 'package:movies_app/core/services/service_locator.dart';
-import 'package:movies_app/core/resources/app_strings.dart';
-import 'package:movies_app/core/resources/app_theme.dart';
-import 'package:movies_app/movies/presentation/controllers/movies_bloc/movies_bloc.dart';
-import 'package:movies_app/movies/presentation/controllers/movies_bloc/movies_event.dart';
-import 'package:movies_app/tv_shows/presentation/controllers/tv_shows_bloc/tv_shows_bloc.dart';
-import 'package:movies_app/watchlist/data/models/watchlist_item_model.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movies_app/watchlist/presentation/controllers/watchlist_bloc/watchlist_bloc.dart';
+import 'package:flutter/services.dart';
+import 'core/config/env.dart';
+import 'core/config/constants.dart';
+import 'core/theme/app_theme.dart';
+import 'core/routes/app_router.dart';
+import 'core/injection/service_locator.dart';
 
 void main() async {
+  // Ensure Flutter engine bindings are initialized properly
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
 
-  await Hive.initFlutter();
-  Hive.registerAdapter(WatchlistItemModelAdapter());
-  await Hive.openBox<WatchlistItemModel>('items');
+  // Initialize Enterprise Multi-flavor Configurations
+  Env.init(AppEnvironment.production);
 
-  ServiceLocator.init();
+  // Initialize service locator container (GetIt)
+  await initServiceLocator();
 
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => sl<MoviesBloc>()..add(GetMoviesEvent()),
-        ),
-        BlocProvider(
-          create: (context) => sl<TVShowsBloc>()..add(GetTVShowsEvent()),
-        ),
-        BlocProvider(
-          create: (context) =>
-              sl<WatchlistBloc>()..add(GetWatchListItemsEvent()),
-        ),
-      ],
-      child: const MyApp(),
+  // Customize System UI Overlay (Status bar style & orientation settings)
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
+
+  // Lock device orientation to portrait by default for mobile flow integrity
+  // (Fullscreen toggling handles orientation dynamically inside player screens)
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(const EtfaragApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EtfaragApp extends StatelessWidget {
+  const EtfaragApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      title: AppStrings.appTitle,
-      theme: getApplicationTheme(),
-      routerConfig: AppRouter.router,
+      themeMode: ThemeMode.dark, // Default to premium Midnight Velvet Dark Theme
+      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      routerConfig: appRouter,
     );
   }
 }
