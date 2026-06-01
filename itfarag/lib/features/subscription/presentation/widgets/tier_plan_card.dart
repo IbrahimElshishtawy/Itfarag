@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
+import 'tier_plan_header.dart';
 
 class TierPlanCard extends StatelessWidget {
   final String name;
@@ -30,7 +31,7 @@ class TierPlanCard extends StatelessWidget {
               border: Border.all(color: color, width: 2.5),
               boxShadow: [
                 BoxShadow(
-                  color: color.withValues(alpha: 0.15),
+                  color: color.withOpacity(0.15),
                   blurRadius: 20,
                   spreadRadius: 2,
                 ),
@@ -44,33 +45,10 @@ class TierPlanCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  name,
-                  style: AppTypography.heading3.copyWith(color: Colors.white),
-                ),
-                if (isPopular)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Text(
-                      'POPULAR',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-              ],
+            TierPlanHeader(
+              name: name,
+              color: color,
+              isPopular: isPopular,
             ),
             const SizedBox(height: 12),
             Text(
