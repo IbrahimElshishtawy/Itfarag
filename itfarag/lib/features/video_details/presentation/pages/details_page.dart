@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
+import '../widgets/cast_list_item.dart';
 
 class DetailsPage extends StatelessWidget {
   final String id;
@@ -128,7 +129,7 @@ class DetailsPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white70, height: 1.4, fontSize: 13),
                     ),
                     const SizedBox(height: 24),
-                    // Cast List Row stubs
+                    // Cast List Row
                     Text(
                       'Featured Cast',
                       style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 16),
@@ -141,18 +142,9 @@ class DetailsPage extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         itemCount: 4,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: Column(
-                              children: const [
-                                CircleAvatar(
-                                  radius: 24,
-                                  backgroundImage: NetworkImage('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60'),
-                                ),
-                                SizedBox(height: 6),
-                                Text('Actor Name', style: TextStyle(color: Colors.white70, fontSize: 10)),
-                              ],
-                            ),
+                          return const CastListItem(
+                            actorName: 'Actor Name',
+                            imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60',
                           );
                         },
                       ),
