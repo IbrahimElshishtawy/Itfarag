@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, use_super_parameters
 
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class LivePage extends StatefulWidget {
@@ -11,6 +12,11 @@ class LivePage extends StatefulWidget {
 }
 
 class _LivePageState extends State<LivePage> {
+  late VideoPlayerController _playerController;
+  bool _isInitialized = false;
+  bool _isPlaying = false;
+  bool _isBuffering = false;
+
   final List<String> _chatMessages = [
     'Wow, the video stream looks incredibly crisp! 🔥',
     'Best cyberpunk live stream in Flutter! 🦾',
@@ -20,19 +26,79 @@ class _LivePageState extends State<LivePage> {
 
   final TextEditingController _commentController = TextEditingController();
 
+  // Stable public Tears of Steel HLS broadcast stream
+  static const String _liveStreamUrl =
+      'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8';
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeLivePlayer();
+  }
+
+  void _initializeLivePlayer() {
+    _playerController = VideoPlayerController.networkUrl(Uri.parse(_liveStreamUrl))
+      ..initialize().then((_) {
+        if (mounted) {
+          setState(() {
+            _isInitialized = true;
+            _playerController.play();
+            _playerController.setLooping(true);
+            _isPlaying = true;
+          });
+        }
+      });
+
+    _playerController.addListener(_videoListener);
+  }
+
+  void _videoListener() {
+    if (_playerController.value.isBuffering != _isBuffering) {
+      setState(() {
+        _isBuffering = _playerController.value.isBuffering;
+      });
+    }
+  }
+
   @override
   void dispose() {
+    _playerController.removeListener(_videoListener);
+    _playerController.dispose();
     _commentController.dispose();
     super.dispose();
   }
 
+  void _togglePlay() {
+    if (!_isInitialized) return;
+    setState(() {
+      if (_isPlaying) {
+        _playerController.pause();
+        _isPlaying = false;
+      } else {
+        _playerController.play();
+        _isPlaying = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    // Theme-dependent colors for unified premium feel
+    final textColor = isDark ? Colors.white : Colors.black87;
+    final subTextColor = isDark ? Colors.white60 : Colors.black54;
+    final dividerColor = isDark ? Colors.white12 : Colors.black12;
+    
+    final bgGradient = isDark 
+        ? AppColors.darkBackgroundGradient 
+        : [const Color(0xFFF2F3F8), const Color(0xFFE3E5EE)];
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: bgGradient,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -41,73 +107,129 @@ class _LivePageState extends State<LivePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Broadcast View Card
+              // Broadcast Active Live Video Player View Card
               Container(
                 height: 240,
                 margin: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  image: const DecorationImage(
-                    image: NetworkImage('https://images.unsplash.com/photo-1542204172-e7052809a936?w=800&auto=format&fit=crop&q=80'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    // Gradient overlay
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        gradient: LinearGradient(
-                          colors: [Colors.black54, Colors.transparent],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                      ),
-                    ),
-                    // Live & Viewers details
-                    Positioned(
-                      top: 12,
-                      left: 12,
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text('LIVE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
-                          ),
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Row(
-                              children: const [
-                                Icon(Icons.remove_red_eye_rounded, color: Colors.white, size: 10),
-                                SizedBox(width: 4),
-                                Text('14.2K', style: TextStyle(fontSize: 10, color: Colors.white)),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 12,
-                      right: 12,
-                      child: IconButton(
-                        icon: const Icon(Icons.fullscreen_rounded, color: Colors.white, size: 28),
-                        onPressed: () {},
-                      ),
+                  color: Colors.black,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    fit: StackFit.expand,
+                    children: [
+                      // Video Render Frame
+                      _isInitialized
+                          ? GestureDetector(
+                              onTap: _togglePlay,
+                              child: AspectRatio(
+                                aspectRatio: _playerController.value.aspectRatio,
+                                child: VideoPlayer(_playerController),
+                              ),
+                            )
+                          : const Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(color: AppColors.primary),
+                                  SizedBox(height: 12),
+                                  Text(
+                                    'Connecting to Broadcast Stream...',
+                                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                      // Dark overlay at top for better view of LIVE badges
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: 60,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.black54, Colors.transparent],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // Live & Viewers badges
+                      Positioned(
+                        top: 12,
+                        left: 12,
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: const Text('LIVE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.remove_red_eye_rounded, color: Colors.white, size: 10),
+                                  SizedBox(width: 4),
+                                  Text('14.2K', style: TextStyle(fontSize: 10, color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Manual Play/Pause Quick Tap overlay
+                      if (_isInitialized && !_isPlaying)
+                        GestureDetector(
+                          onTap: _togglePlay,
+                          child: Container(
+                            color: Colors.black45,
+                            child: const Center(
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.white24,
+                                child: Icon(Icons.play_arrow_rounded, color: Colors.white, size: 40),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      // Buffering Indicator overlay
+                      if (_isBuffering)
+                        Container(
+                          color: Colors.black26,
+                          child: const Center(
+                            child: CircularProgressIndicator(color: AppColors.secondary),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
+
               // Live Broadcaster Profile info
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -121,15 +243,19 @@ class _LivePageState extends State<LivePage> {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Ahmed Esports Live Broadcast', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 2),
-                          Text('Playing Cyber City 2026', style: TextStyle(color: Colors.white60, fontSize: 12)),
+                        children: [
+                          Text('Ahmed Esports Live Broadcast', style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 2),
+                          Text('Playing Cyber City 2026', style: TextStyle(color: subTextColor, fontSize: 12)),
                         ],
                       ),
                     ),
                     ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.accent, foregroundColor: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.accent, 
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
                       icon: const Icon(Icons.star_rounded, size: 16),
                       label: const Text('Subscribe'),
                       onPressed: () {},
@@ -137,7 +263,9 @@ class _LivePageState extends State<LivePage> {
                   ],
                 ),
               ),
-              const Divider(color: Colors.white12, height: 24, thickness: 1),
+              
+              Divider(color: dividerColor, height: 24, thickness: 1),
+
               // Chat Message list
               Expanded(
                 child: ListView.builder(
@@ -145,14 +273,19 @@ class _LivePageState extends State<LivePage> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: _chatMessages.length,
                   itemBuilder: (context, index) {
+                    final isOdd = index % 2 == 1;
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CircleAvatar(
+                          CircleAvatar(
                             radius: 12,
-                            backgroundImage: NetworkImage('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60'),
+                            backgroundImage: NetworkImage(
+                              isOdd 
+                                ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60'
+                                : 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&auto=format&fit=crop&q=60'
+                            ),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -163,7 +296,7 @@ class _LivePageState extends State<LivePage> {
                                 children: [
                                   TextSpan(
                                     text: _chatMessages[index],
-                                    style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.normal),
+                                    style: TextStyle(color: textColor.withOpacity(0.8), fontWeight: FontWeight.normal),
                                   ),
                                 ],
                               ),
@@ -175,6 +308,7 @@ class _LivePageState extends State<LivePage> {
                   },
                 ),
               ),
+
               // Input bar
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -183,20 +317,20 @@ class _LivePageState extends State<LivePage> {
                     Expanded(
                       child: TextField(
                         controller: _commentController,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: textColor),
                         decoration: InputDecoration(
                           hintText: 'Join the chat...',
-                          hintStyle: const TextStyle(color: Colors.white54),
+                          hintStyle: TextStyle(color: subTextColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),
-                            borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
+                            borderSide: BorderSide(color: textColor.withOpacity(0.15)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),
                             borderSide: const BorderSide(color: AppColors.accent),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.05),
+                          fillColor: textColor.withOpacity(0.05),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         ),
                       ),

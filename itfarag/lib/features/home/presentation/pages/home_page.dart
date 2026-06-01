@@ -450,7 +450,7 @@ class _MediaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final urls = [
-      'https://images.unsplash.com/photo-1542204172-e7052809a936?w=400&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=60',
