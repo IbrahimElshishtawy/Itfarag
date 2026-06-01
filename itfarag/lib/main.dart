@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'core/config/env.dart';
 import 'core/config/constants.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/injection/service_locator.dart';
 
@@ -36,18 +37,26 @@ void main() async {
   runApp(const EtfaragApp());
 }
 
+
+
 class EtfaragApp extends StatelessWidget {
-  const EtfaragApp({Key? key}) : super(key: key);
+  const EtfaragApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: AppConstants.appName,
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark, // Default to premium Midnight Velvet Dark Theme
-      darkTheme: AppTheme.darkTheme,
-      theme: AppTheme.lightTheme,
-      routerConfig: appRouter,
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: sl<ThemeManager>(),
+      builder: (context, currentThemeMode, _) {
+        return MaterialApp.router(
+          title: AppConstants.appName,
+          debugShowCheckedModeBanner: false,
+          themeMode: currentThemeMode,
+          darkTheme: AppTheme.darkTheme,
+          theme: AppTheme.lightTheme,
+          routerConfig: appRouter,
+        );
+      },
     );
   }
 }
+

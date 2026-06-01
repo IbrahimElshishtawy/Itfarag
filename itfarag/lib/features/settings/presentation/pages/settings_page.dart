@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-
+import '../../../../core/theme/theme_manager.dart';
+import '../../../../core/injection/service_locator.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -13,22 +14,44 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _darkMode = true;
+  late bool _darkMode;
   bool _dataSaver = false;
   String _selectedLanguage = 'English';
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize standard state based on the current state of ThemeManager
+    _darkMode = sl<ThemeManager>().isDarkMode;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    // Theme-dependent colors for unified premium feel
+    final textColor = isDark ? Colors.white : Colors.black87;
+    final subTextColor = isDark ? Colors.white60 : Colors.black54;
+    final dividerColor = isDark ? Colors.white12 : Colors.black12;
+    final appBarColor = isDark ? Colors.white : Colors.black87;
+    
+    final bgGradient = isDark 
+        ? AppColors.darkBackgroundGradient 
+        : [const Color(0xFFF2F3F8), const Color(0xFFE3E5EE)];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Settings', style: TextStyle(color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          'App Settings', 
+          style: TextStyle(color: appBarColor, fontWeight: FontWeight.bold),
+        ),
+        iconTheme: IconThemeData(color: appBarColor),
       ),
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: bgGradient,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -43,6 +66,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 GlassCard(
                   borderRadius: 20,
                   padding: const EdgeInsets.all(12),
+                  fillOpacity: isDark ? 0.15 : 0.45,
+                  borderOpacity: isDark ? 0.2 : 0.1,
                   child: Column(
                     children: [
                       SwitchListTile(
@@ -51,12 +76,20 @@ class _SettingsPageState extends State<SettingsPage> {
                           setState(() {
                             _darkMode = val;
                           });
+                          // Trigger dynamic theme change globally
+                          sl<ThemeManager>().toggleTheme(val);
                         },
-                        title: const Text('Ultra Dark Theme Mode', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                        subtitle: const Text('Velvet midnight black interface style', style: TextStyle(color: Colors.white54, fontSize: 11)),
+                        title: Text(
+                          'Ultra Dark Theme Mode', 
+                          style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        subtitle: Text(
+                          'Velvet midnight black interface style', 
+                          style: TextStyle(color: subTextColor, fontSize: 11),
+                        ),
                         activeColor: AppColors.primary,
                       ),
-                      const Divider(color: Colors.white12, height: 16),
+                      Divider(color: dividerColor, height: 16),
                       SwitchListTile(
                         value: _dataSaver,
                         onChanged: (val) {
@@ -64,20 +97,32 @@ class _SettingsPageState extends State<SettingsPage> {
                             _dataSaver = val;
                           });
                         },
-                        title: const Text('Dynamic Data Saver Mode', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                        subtitle: const Text('Limits streams to 480p to reduce internet bills', style: TextStyle(color: Colors.white54, fontSize: 11)),
+                        title: Text(
+                          'Dynamic Data Saver Mode', 
+                          style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        subtitle: Text(
+                          'Limits streams to 480p to reduce internet bills', 
+                          style: TextStyle(color: subTextColor, fontSize: 11),
+                        ),
                         activeColor: AppColors.secondary,
                       ),
-                      const Divider(color: Colors.white12, height: 16),
+                      Divider(color: dividerColor, height: 16),
                       ListTile(
-                        title: const Text('Preferred Content Language', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                        subtitle: Text('Current language: $_selectedLanguage', style: const TextStyle(color: Colors.white54, fontSize: 11)),
+                        title: Text(
+                          'Preferred Content Language', 
+                          style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        subtitle: Text(
+                          'Current language: $_selectedLanguage', 
+                          style: TextStyle(color: subTextColor, fontSize: 11),
+                        ),
                         trailing: DropdownButton<String>(
-                          dropdownColor: AppColors.darkBackground,
+                          dropdownColor: isDark ? AppColors.darkBackground : AppColors.lightSurface,
                           value: _selectedLanguage,
                           underline: const SizedBox(),
-                          icon: const Icon(Icons.arrow_drop_down_rounded, color: Colors.white),
-                          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                          icon: Icon(Icons.arrow_drop_down_rounded, color: textColor),
+                          style: TextStyle(color: textColor, fontSize: 13, fontWeight: FontWeight.bold),
                           items: const [
                             DropdownMenuItem(value: 'English', child: Text('English')),
                             DropdownMenuItem(value: 'العربية', child: Text('العربية')),
@@ -99,12 +144,20 @@ class _SettingsPageState extends State<SettingsPage> {
                 GlassCard(
                   borderRadius: 20,
                   padding: const EdgeInsets.all(16),
+                  fillOpacity: isDark ? 0.15 : 0.45,
+                  borderOpacity: isDark ? 0.2 : 0.1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Offline Download Speed', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                      SizedBox(height: 8),
-                      Text('Downloads will use high-speed multi-threaded chunks decrypting stored visual data on-the-fly.', style: TextStyle(color: Colors.white54, fontSize: 12, height: 1.4)),
+                    children: [
+                      Text(
+                        'Offline Download Speed', 
+                        style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 14),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Downloads will use high-speed multi-threaded chunks decrypting stored visual data on-the-fly.', 
+                        style: TextStyle(color: subTextColor, fontSize: 12, height: 1.4),
+                      ),
                     ],
                   ),
                 ),
