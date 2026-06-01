@@ -4,6 +4,7 @@ import 'core/config/env.dart';
 import 'core/config/constants.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_manager.dart';
+import 'core/localization/language_manager.dart';
 import 'core/routes/app_router.dart';
 import 'core/injection/service_locator.dart';
 
@@ -47,13 +48,29 @@ class EtfaragApp extends StatelessWidget {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: sl<ThemeManager>(),
       builder: (context, currentThemeMode, _) {
-        return MaterialApp.router(
-          title: AppConstants.appName,
-          debugShowCheckedModeBanner: false,
-          themeMode: currentThemeMode,
-          darkTheme: AppTheme.darkTheme,
-          theme: AppTheme.lightTheme,
-          routerConfig: appRouter,
+        return ValueListenableBuilder<Locale>(
+          valueListenable: sl<LanguageManager>(),
+          builder: (context, currentLocale, _) {
+            return MaterialApp.router(
+              title: AppConstants.appName,
+              debugShowCheckedModeBanner: false,
+              themeMode: currentThemeMode,
+              darkTheme: AppTheme.darkTheme,
+              theme: AppTheme.lightTheme,
+              locale: currentLocale,
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar'),
+                Locale('fr'),
+              ],
+              localizationsDelegates: const [
+                DefaultMaterialLocalizations.delegate,
+                DefaultWidgetsLocalizations.delegate,
+                DefaultCupertinoLocalizations.delegate,
+              ],
+              routerConfig: appRouter,
+            );
+          },
         );
       },
     );

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_manager.dart';
+import '../../../../core/localization/language_manager.dart';
 import '../../../../core/injection/service_locator.dart';
 import '../widgets/settings_group_card.dart';
 import '../widgets/download_speed_info_card.dart';
@@ -23,6 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     _darkMode = sl<ThemeManager>().isDarkMode;
+    _selectedLanguage = sl<LanguageManager>().currentLanguageName;
   }
 
   @override
@@ -79,6 +81,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       setState(() {
                         _selectedLanguage = val;
                       });
+                      String code = 'en';
+                      if (val == 'العربية') code = 'ar';
+                      if (val == 'Français') code = 'fr';
+                      sl<LanguageManager>().changeLanguage(code);
                     }
                   },
                 ),

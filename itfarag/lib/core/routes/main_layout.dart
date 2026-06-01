@@ -46,6 +46,7 @@ class MainLayout extends StatelessWidget {
 
   Widget _buildNavItem(int index, IconData icon, int selectedIndex, BuildContext context) {
     final isSelected = index == selectedIndex;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: () => _onItemTapped(index, context),
       behavior: HitTestBehavior.opaque,
@@ -61,7 +62,9 @@ class MainLayout extends StatelessWidget {
         child: Icon(
           icon,
           size: 22,
-          color: isSelected ? AppColors.primary : Colors.white70,
+          color: isSelected 
+              ? AppColors.primary 
+              : (isDark ? Colors.white70 : Colors.black54),
         ),
       ),
     );
@@ -70,6 +73,7 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       extendBody: true,
@@ -77,10 +81,10 @@ class MainLayout extends StatelessWidget {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(left: 16, right: 16, bottom: 22),
         child: GlassCard(
-          borderRadius: 24, // Premium smooth corner curves
+          borderRadius: 24, // Beautiful premium smooth curves
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-          fillOpacity: 0.08,
-          borderOpacity: 0.15,
+          fillOpacity: isDark ? 0.08 : 0.45,
+          borderOpacity: isDark ? 0.15 : 0.08,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
