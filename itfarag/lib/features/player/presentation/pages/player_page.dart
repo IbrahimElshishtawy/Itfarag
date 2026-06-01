@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../widgets/player_top_bar.dart';
 import '../widgets/player_center_controls.dart';
 import '../widgets/player_seek_panel.dart';
