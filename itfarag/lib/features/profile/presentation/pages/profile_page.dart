@@ -1,9 +1,13 @@
+// ignore_for_file: deprecated_member_use, use_super_parameters
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
+import '../widgets/stats_card.dart';
+import '../widgets/profile_tile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -82,18 +86,18 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 24),
                 // Achievement / Stream Stats Row
                 Row(
-                  children: [
+                  children: const [
                     Expanded(
-                      child: _StatsCard(
+                      child: StatsCard(
                         icon: Icons.local_fire_department_rounded,
                         value: '18 Days',
                         label: 'Watch Streak',
                         iconColor: AppColors.primary,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
-                      child: _StatsCard(
+                      child: StatsCard(
                         icon: Icons.timer_rounded,
                         value: '142 Hrs',
                         label: 'Stream Time',
@@ -109,7 +113,7 @@ class ProfilePage extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      _ProfileTile(
+                      ProfileTile(
                         icon: Icons.card_membership_rounded,
                         title: 'My Premium Subscription',
                         subtitle: 'Yearly Plan • Renews in 300 days',
@@ -118,7 +122,7 @@ class ProfilePage extends StatelessWidget {
                         },
                       ),
                       const Divider(color: Colors.white12, height: 16),
-                      _ProfileTile(
+                      ProfileTile(
                         icon: Icons.settings_rounded,
                         title: 'Settings & Privacy',
                         subtitle: 'Quality, Downloads, Subtitles',
@@ -127,7 +131,7 @@ class ProfilePage extends StatelessWidget {
                         },
                       ),
                       const Divider(color: Colors.white12, height: 16),
-                      _ProfileTile(
+                      ProfileTile(
                         icon: Icons.dashboard_customize_rounded,
                         title: 'Creator Analytics Dashboard',
                         subtitle: 'Uploads, Viewers & Followers metrics',
@@ -156,79 +160,6 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _StatsCard extends StatelessWidget {
-  final IconData icon;
-  final String value;
-  final String label;
-  final Color iconColor;
-
-  const _StatsCard({
-    Key? key,
-    required this.icon,
-    required this.value,
-    required this.label,
-    required this.iconColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GlassCard(
-      borderRadius: 16,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundColor: iconColor.withOpacity(0.15),
-            child: Icon(icon, color: iconColor, size: 18),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            value,
-            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ProfileTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final VoidCallback onTap;
-
-  const _ProfileTile({
-    Key? key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 16,
-        backgroundColor: Colors.white.withOpacity(0.05),
-        child: Icon(icon, color: Colors.white70, size: 18),
-      ),
-      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-      subtitle: Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 11)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30, size: 14),
-      onTap: onTap,
     );
   }
 }
