@@ -5,8 +5,10 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
-import '../../../../core/shared/widgets/premium_button.dart';
 import '../widgets/cast_list_item.dart';
+import '../widgets/video_specs_row.dart';
+import '../widgets/video_action_row.dart';
+import '../widgets/video_description_section.dart';
 
 class DetailsPage extends StatelessWidget {
   final String id;
@@ -62,74 +64,27 @@ class DetailsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Text('HD', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: const Text('DOLBY VISION', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.star_rounded, color: AppColors.secondary, size: 16),
-                        const SizedBox(width: 4),
-                        const Text('4.9', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
-                      ],
-                    ),
+                    const VideoSpecsRow(rating: '4.9'),
                     const SizedBox(height: 16),
                     Text(
                       'The Cyber Edge (ID: $id)',
                       style: AppTypography.heading1.copyWith(color: Colors.white),
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: PremiumButton(
-                            text: 'Play Stream',
-                            icon: Icons.play_arrow_rounded,
-                            onPressed: () {
-                              context.pushNamed(
-                                RouteNames.player,
-                                pathParameters: {'id': id},
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        CircleAvatar(
-                          radius: 26,
-                          backgroundColor: Colors.white.withOpacity(0.05),
-                          child: IconButton(
-                            icon: const Icon(Icons.download_rounded, color: AppColors.secondary),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
+                    VideoActionRow(
+                      onPlayPressed: () {
+                        context.pushNamed(
+                          RouteNames.player,
+                          pathParameters: {'id': id},
+                        );
+                      },
+                      onDownloadPressed: () {},
                     ),
                     const SizedBox(height: 24),
-                    Text(
-                      'Description',
-                      style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 16),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'In a dystopian cyberpunk metropolitan future, an rogue virtual agent breaks through the system mainframe, threatening the boundary between physical flesh and code matrices. A team of system hackers must hunt her down before the network collapse.',
-                      style: TextStyle(color: Colors.white70, height: 1.4, fontSize: 13),
+                    const VideoDescriptionSection(
+                      description: 'In a dystopian cyberpunk metropolitan future, an rogue virtual agent breaks through the system mainframe, threatening the boundary between physical flesh and code matrices. A team of system hackers must hunt her down before the network collapse.',
                     ),
                     const SizedBox(height: 24),
-                    // Cast List Row
                     Text(
                       'Featured Cast',
                       style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 16),
