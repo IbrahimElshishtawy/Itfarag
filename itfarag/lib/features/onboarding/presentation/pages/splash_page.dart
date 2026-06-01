@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
-import '../../../../core/shared/widgets/glass_card.dart';
+import '../widgets/splash_background_glows.dart';
+import '../widgets/splash_logo_and_brand.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -62,47 +62,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Dark gradient overlay to ensure text readability over the splash backdrop
-            Container(
-              color: Colors.black.withOpacity(0.65),
-            ),
-            // Ambient premium backgrounds glow
-            Positioned(
-              top: -100,
-              right: -100,
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.accent.withOpacity(0.15),
-                      blurRadius: 100,
-                      spreadRadius: 50,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: -50,
-              left: -50,
-              child: Container(
-                width: 250,
-                height: 250,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.secondary.withOpacity(0.12),
-                      blurRadius: 80,
-                      spreadRadius: 40,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const SplashBackgroundGlows(),
             Center(
               child: AnimatedBuilder(
                 animation: _controller,
@@ -115,48 +75,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     ),
                   );
                 },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Premium Glassmorphic App Icon Container
-                    GlassCard(
-                      borderRadius: 28,
-                      padding: const EdgeInsets.all(12),
-                      fillOpacity: 0.15,
-                      borderOpacity: 0.25,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset(
-                          'assets/images/app_icon.png',
-                          width: 120,
-                          height: 120,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'ETFARAG',
-                      style: AppTypography.heading1.copyWith(
-                        fontSize: 40,
-                        letterSpacing: 3,
-                        foreground: Paint()
-                          ..shader = LinearGradient(
-                            colors: AppColors.premiumGradient,
-                          ).createShader(const Rect.fromLTWH(0.0, 0.0, 300.0, 70.0)),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'The Future of Entertainment Streaming',
-                      textAlign: TextAlign.center,
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: Colors.white60,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                  ],
-                ),
+                child: const SplashLogoAndBrand(),
               ),
             ),
             const Positioned(

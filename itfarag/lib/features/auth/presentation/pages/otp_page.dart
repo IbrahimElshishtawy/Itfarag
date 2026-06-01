@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
+import '../widgets/otp_input_row.dart';
 
 class OtpPage extends StatefulWidget {
   final String phone;
@@ -20,30 +21,7 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
-  final List<TextEditingController> _controllers = List.generate(6, (_) => TextEditingController());
-  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
-
-  @override
-  void dispose() {
-    for (var controller in _controllers) {
-      controller.dispose();
-    }
-    for (var node in _focusNodes) {
-      node.dispose();
-    }
-    super.dispose();
-  }
-
-  void _onCodeChanged(String value, int index) {
-    if (value.isNotEmpty && index < 5) {
-      _focusNodes[index + 1].requestFocus();
-    }
-    if (value.isEmpty && index > 0) {
-      _focusNodes[index - 1].requestFocus();
-    }
-  }
-
-  String get _verificationCode => _controllers.map((c) => c.text).join();
+  String _verificationCode = '';
 
   @override
   Widget build(BuildContext context) {
@@ -85,36 +63,13 @@ class _OtpPageState extends State<OtpPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(
-                          6,
-                          (index) => SizedBox(
-                            width: 45,
-                            child: TextFormField(
-                              controller: _controllers[index],
-                              focusNode: _focusNodes[index],
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              maxLength: 1,
-                              style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                              decoration: InputDecoration(
-                                counterText: '',
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(color: AppColors.secondary),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white.withOpacity(0.05),
-                              ),
-                              onChanged: (val) => _onCodeChanged(val, index),
-                            ),
-                          ),
-                        ),
+                      OtpInputRow(
+                        length: 6,
+                        onChanged: (code) {
+                          setState(() {
+                            _verificationCode = code;
+                          });
+                        },
                       ),
                       const SizedBox(height: 32),
                       PremiumButton(
@@ -140,7 +95,7 @@ class _OtpPageState extends State<OtpPage> {
                 Center(
                   child: TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'Resend Code via SMS',
                       style: TextStyle(color: AppColors.secondary, fontWeight: FontWeight.bold),
                     ),

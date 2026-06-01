@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/shared/widgets/glass_card.dart';
+import 'player_skip_intro_button.dart';
+import 'player_volume_and_specs.dart';
 
 class PlayerSeekPanel extends StatelessWidget {
   final Duration currentPosition;
@@ -38,26 +39,11 @@ class PlayerSeekPanel extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Skip Intro button seeking 2 minutes (120s)
-          if (currentPosition < const Duration(minutes: 2))
-            Align(
-              alignment: Alignment.centerRight,
-              child: GlassCard(
-                borderRadius: 8,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                fillOpacity: 0.2,
-                child: GestureDetector(
-                  onTap: onSkipIntro,
-                  child: const Text(
-                    'Skip Intro ⏩',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
-                  ),
-                ),
-              ),
-            ),
+          PlayerSkipIntroButton(
+            currentPosition: currentPosition,
+            onSkipIntro: onSkipIntro,
+          ),
           const SizedBox(height: 12),
-
-          // Timeline & Slider Seek controls
           Row(
             children: [
               Text(
@@ -80,33 +66,10 @@ class PlayerSeekPanel extends StatelessWidget {
               ),
             ],
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      currentVolume > 0.0
-                          ? Icons.volume_up_rounded
-                          : Icons.volume_off_rounded,
-                      color: Colors.white,
-                    ),
-                    onPressed: onVolumeToggle,
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'HLS Adaptive Bitrate Stream',
-                    style: TextStyle(color: Colors.white54, fontSize: 11),
-                  ),
-                ],
-              ),
-              IconButton(
-                icon: const Icon(Icons.fullscreen_exit_rounded, color: Colors.white),
-                onPressed: onFullscreenExit,
-              ),
-            ],
+          PlayerVolumeAndSpecs(
+            currentVolume: currentVolume,
+            onVolumeToggle: onVolumeToggle,
+            onFullscreenExit: onFullscreenExit,
           ),
         ],
       ),

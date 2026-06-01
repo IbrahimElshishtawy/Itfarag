@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 import '../widgets/stats_card.dart';
 import '../widgets/profile_tile.dart';
+import '../widgets/profile_header_card.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -31,60 +31,13 @@ class ProfilePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 16),
-                Center(
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            colors: AppColors.premiumGradient,
-                          ),
-                        ),
-                        child: const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'),
-                        ),
-                      ),
-                      // Level Badge Overlay (Diamond Level status)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppColors.secondary,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.secondary.withOpacity(0.4),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          '💎 DIAMOND',
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 10),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: Text(
-                    'Sara El-Sayed',
-                    style: AppTypography.heading2.copyWith(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Center(
-                  child: Text(
-                    'Premium Member since June 2026',
-                    style: AppTypography.bodySmall.copyWith(color: Colors.white54),
-                  ),
+                const ProfileHeaderCard(
+                  userName: 'Sara El-Sayed',
+                  joinDate: 'Premium Member since June 2026',
+                  levelText: '💎 DIAMOND',
+                  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
                 ),
                 const SizedBox(height: 24),
-                // Achievement / Stream Stats Row
                 Row(
                   children: const [
                     Expanded(
@@ -107,7 +60,6 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                // Account links List
                 GlassCard(
                   borderRadius: 20,
                   padding: const EdgeInsets.all(12),
