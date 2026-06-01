@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../core/theme/app_colors.dart';
-import 'action_button.dart';
-import 'spinning_audio_disc.dart';
+import 'shorts_description_panel.dart';
+import 'shorts_sidebar_actions.dart';
 
 class ShortsVideoCard extends StatefulWidget {
   final String videoUrl;
@@ -51,7 +51,6 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
             _controller.setLooping(true);
             _controller.setVolume(1.0);
           });
-          // Auto-play if initially focused
           if (widget.isFocused) {
             _controller.play();
             setState(() {
@@ -100,7 +99,6 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
       _showPlayIndicator = true;
     });
 
-    // Auto-hide large center play/pause visual indicator
     Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) {
         setState(() {
@@ -117,7 +115,6 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Background Video Renderer
           _isInitialized
               ? FittedBox(
                   fit: BoxFit.cover,
@@ -132,8 +129,6 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
               : const Center(
                   child: CircularProgressIndicator(color: AppColors.primary),
                 ),
-
-          // Double tap / Single tap visual scale feedback indicator
           if (_showPlayIndicator)
             Center(
               child: AnimatedOpacity(
@@ -150,23 +145,19 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
                 ),
               ),
             ),
-
-          // Dynamic shading/gradient overlay for subtitle readability
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.black.withValues(alpha: 0.3),
+                  Colors.black.withOpacity(0.3),
                   Colors.transparent,
-                  Colors.black.withValues(alpha: 0.7)
+                  Colors.black.withOpacity(0.7)
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
           ),
-
-          // Buffering progress overlay
           ValueListenableBuilder(
             valueListenable: _controller,
             builder: (context, VideoPlayerValue value, child) {
@@ -178,76 +169,14 @@ class _ShortsVideoCardState extends State<ShortsVideoCard> {
               return const SizedBox();
             },
           ),
-
-          // Creator details, title, sound labels
-          Positioned(
-            bottom: 30,
-            left: 16,
-            right: 80,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 18,
-                      backgroundImage: NetworkImage('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60'),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      widget.creator,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: const Text('Follow', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  widget.description,
-                  style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.3),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(Icons.music_note_rounded, color: Colors.white, size: 14),
-                    const SizedBox(width: 4),
-                    Expanded(
-                      child: Text(
-                        widget.audio,
-                        style: const TextStyle(color: Colors.white70, fontSize: 11),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          ShortsDescriptionPanel(
+            creator: widget.creator,
+            description: widget.description,
+            audio: widget.audio,
           ),
-
-          // Premium sidebar interactive buttons
-          Positioned(
-            bottom: 30,
-            right: 16,
-            child: Column(
-              children: [
-                ActionButton(icon: Icons.favorite_rounded, label: widget.likes, iconColor: AppColors.primary),
-                const SizedBox(height: 20),
-                ActionButton(icon: Icons.comment_rounded, label: widget.comments),
-                const SizedBox(height: 20),
-                ActionButton(icon: Icons.share_rounded, label: 'Share'),
-                const SizedBox(height: 20),
-                const SpinningAudioDisc(),
-              ],
-            ),
+          ShortsSidebarActions(
+            likes: widget.likes,
+            comments: widget.comments,
           ),
         ],
       ),
