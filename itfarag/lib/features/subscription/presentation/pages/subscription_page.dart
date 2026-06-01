@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element_parameter
+
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -5,7 +7,7 @@ import '../../../../core/shared/widgets/glass_card.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
 
 class SubscriptionPage extends StatelessWidget {
-  const SubscriptionPage({Key? key}) : super(key: key);
+  const SubscriptionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +85,13 @@ class _TierPlanCard extends StatelessWidget {
   final bool isPopular;
 
   const _TierPlanCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.price,
     required this.description,
     required this.color,
     this.isPopular = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

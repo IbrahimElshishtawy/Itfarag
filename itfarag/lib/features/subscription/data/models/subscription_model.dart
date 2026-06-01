@@ -1,3 +1,5 @@
+// ignore_for_file: use_super_parameters
+
 import '../../domain/entities/subscription_entity.dart';
 
 class SubscriptionModel extends SubscriptionEntity {

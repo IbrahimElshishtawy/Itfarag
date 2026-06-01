@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 void main() {
-  print('ETFARAG Clean Architecture & BLoC Generator Starting...');
+  if (kDebugMode) {
+    print('ETFARAG Clean Architecture & BLoC Generator Starting...');
+  }
 
   final features = [
     'auth',
@@ -23,7 +27,9 @@ void main() {
     _generateFeature(feature);
   }
 
-  print('ETFARAG Generator finished successfully! Created 13 features.');
+  if (kDebugMode) {
+    print('ETFARAG Generator finished successfully! Created 13 features.');
+  }
 }
 
 void _generateFeature(String feature) {

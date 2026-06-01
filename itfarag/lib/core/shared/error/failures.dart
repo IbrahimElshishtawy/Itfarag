@@ -9,21 +9,21 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure([String message = 'A server error occurred. Please try again.']) : super(message);
+  const ServerFailure([super.message = 'A server error occurred. Please try again.']);
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Failed to load local cache data.']) : super(message);
+  const CacheFailure([super.message = 'Failed to load local cache data.']);
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure([String message = 'Please check your internet connection and try again.']) : super(message);
+  const NetworkFailure([super.message = 'Please check your internet connection and try again.']);
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure([String message = 'Authentication failed. Please verify credentials.']) : super(message);
+  const AuthFailure([super.message = 'Authentication failed. Please verify credentials.']);
 }
 
 class StreamFailure extends Failure {
-  const StreamFailure([String message = 'Video stream decoding or loading failed.']) : super(message);
+  const StreamFailure([super.message = 'Video stream decoding or loading failed.']);
 }

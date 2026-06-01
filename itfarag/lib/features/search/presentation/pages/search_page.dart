@@ -4,6 +4,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 
 class SearchPage extends StatefulWidget {
+  // ignore: use_super_parameters
   const SearchPage({Key? key}) : super(key: key);
 
   @override

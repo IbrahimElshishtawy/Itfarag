@@ -1,10 +1,10 @@
+// ignore_for_file: deprecated_member_use, unused_element_parameter, unused_field
+
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/shared/widgets/glass_card.dart';
 
 class ShortsPage extends StatefulWidget {
-  const ShortsPage({Key? key}) : super(key: key);
+  const ShortsPage({super.key});
 
   @override
   State<ShortsPage> createState() => _ShortsPageState();
@@ -141,11 +141,11 @@ class _ActionButton extends StatelessWidget {
   final Color iconColor;
 
   const _ActionButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     this.iconColor = Colors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
