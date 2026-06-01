@@ -170,7 +170,6 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 16),
                               PremiumButton(
                                 text: 'Sign In',
                                 onPressed: () {
@@ -195,6 +194,31 @@ class _LoginPageState extends State<LoginPage> {
                                       pathParameters: {'phone': _phoneController.text},
                                     );
                                   }
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              OutlinedButton.icon(
+                                style: OutlinedButton.styleFrom(
+                                  side: BorderSide(color: AppColors.secondary.withOpacity(0.5), width: 1.5),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                ),
+                                icon: const Icon(Icons.developer_mode_rounded, color: AppColors.secondary, size: 18),
+                                label: const Text(
+                                  'تسجيل دخول المطور (Developer Login)',
+                                  style: TextStyle(color: AppColors.secondary, fontWeight: FontWeight.bold, fontSize: 13),
+                                ),
+                                onPressed: () {
+                                  _phoneController.text = 'admin';
+                                  _passwordController.text = 'developer_pass_2026';
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('💎 Welcome Back Developer! Bypass Mode Enabled.'),
+                                      backgroundColor: AppColors.secondary,
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                  context.go('/home');
                                 },
                               ),
                             ],
