@@ -59,7 +59,7 @@ class AppTheme {
         headlineLarge: AppTypography.heading1.copyWith(color: Colors.black87),
         headlineMedium: AppTypography.heading2.copyWith(color: Colors.black87),
         headlineSmall: AppTypography.heading3.copyWith(color: Colors.black87),
-        bodyLarge: AppTypography.bodyLarge.copyWith(color: Colors.blackDE),
+        bodyLarge: AppTypography.bodyLarge.copyWith(color: Colors.black87),
         bodyMedium: AppTypography.bodyMedium.copyWith(color: Colors.black54),
         bodySmall: AppTypography.bodySmall.copyWith(color: Colors.black38),
         labelLarge: AppTypography.buttonText.copyWith(color: Colors.black87),

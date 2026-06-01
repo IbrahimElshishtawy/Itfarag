@@ -122,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                               )
                             : Text(
                                 _aiSearchResponse,
-                                style: const TextStyle(color: Colors.white80, fontSize: 13, height: 1.4),
+                                style: const TextStyle(color: Colors.white70, fontSize: 13, height: 1.4),
                               ),
                       ],
                     ),
