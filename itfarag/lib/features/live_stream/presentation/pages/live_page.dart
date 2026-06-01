@@ -163,7 +163,7 @@ class _LivePageState extends State<LivePage> {
                                 children: [
                                   TextSpan(
                                     text: _chatMessages[index],
-                                    style: const TextStyle(color: Colors.white80, fontWeight: FontWeight.normal),
+                                    style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.normal),
                                   ),
                                 ],
                               ),
