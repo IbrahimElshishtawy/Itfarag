@@ -1,7 +1,6 @@
 // ignore_for_file: use_super_parameters
 
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
@@ -30,7 +29,11 @@ class TierPlanCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(24),
               border: Border.all(color: color, width: 2.5),
               boxShadow: [
-                BoxShadow(color: color.withValues(alpha: 0.15), blurRadius: 20, spreadRadius: 2),
+                BoxShadow(
+                  color: color.withValues(alpha: 0.15),
+                  blurRadius: 20,
+                  spreadRadius: 2,
+                ),
               ],
             )
           : null,
@@ -50,19 +53,32 @@ class TierPlanCard extends StatelessWidget {
                 ),
                 if (isPopular)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: color,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text('POPULAR', style: TextStyle(color: Colors.black, fontSize: 9, fontWeight: FontWeight.bold)),
+                    child: const Text(
+                      'POPULAR',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
               ],
             ),
             const SizedBox(height: 12),
             Text(
               price,
-              style: AppTypography.heading1.copyWith(color: color, fontSize: 28),
+              style: AppTypography.heading1.copyWith(
+                color: color,
+                fontSize: 28,
+              ),
             ),
             const SizedBox(height: 12),
             Text(
