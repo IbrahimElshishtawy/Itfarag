@@ -53,16 +53,19 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/splash_bg.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // Dark gradient overlay to ensure text readability over the splash backdrop
+            Container(
+              color: Colors.black.withOpacity(0.65),
+            ),
             // Ambient premium backgrounds glow
             Positioned(
               top: -100,
@@ -115,20 +118,32 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Premium Glassmorphic Logo Container
+                    // Premium Glassmorphic App Icon Container
                     GlassCard(
-                      borderRadius: 24,
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-                      child: Text(
-                        'ETFARAG',
-                        style: AppTypography.heading1.copyWith(
-                          fontSize: 48,
-                          letterSpacing: 3,
-                          foreground: Paint()
-                            ..shader = LinearGradient(
-                              colors: AppColors.premiumGradient,
-                            ).createShader(const Rect.fromLTWH(0.0, 0.0, 300.0, 70.0)),
+                      borderRadius: 28,
+                      padding: const EdgeInsets.all(12),
+                      fillOpacity: 0.15,
+                      borderOpacity: 0.25,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          'assets/images/app_icon.png',
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'ETFARAG',
+                      style: AppTypography.heading1.copyWith(
+                        fontSize: 40,
+                        letterSpacing: 3,
+                        foreground: Paint()
+                          ..shader = LinearGradient(
+                            colors: AppColors.premiumGradient,
+                          ).createShader(const Rect.fromLTWH(0.0, 0.0, 300.0, 70.0)),
                       ),
                     ),
                     const SizedBox(height: 24),

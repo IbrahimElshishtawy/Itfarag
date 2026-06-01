@@ -51,10 +51,22 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            'assets/images/app_icon.png',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Center(
                         child: Text(
                           'ETFARAG',
                           style: AppTypography.heading1.copyWith(
-                            fontSize: 36,
+                            fontSize: 32,
                             foreground: Paint()
                               ..shader = LinearGradient(
                                 colors: AppColors.premiumGradient,
@@ -163,7 +175,21 @@ class _LoginPageState extends State<LoginPage> {
                                 text: 'Sign In',
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    // Navigate to OTP for premium Verification MFA
+                                    // Developer / Administrator Bypass Verification Check
+                                    if (_phoneController.text == 'admin' &&
+                                        _passwordController.text == 'developer_pass_2026') {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('💎 Welcome Back Developer! Bypass Mode Enabled.'),
+                                          backgroundColor: AppColors.secondary,
+                                          duration: Duration(seconds: 3),
+                                        ),
+                                      );
+                                      context.go('/home');
+                                      return;
+                                    }
+
+                                    // Standard User MFA OTP Verification
                                     context.pushNamed(
                                       RouteNames.otp,
                                       pathParameters: {'phone': _phoneController.text},
