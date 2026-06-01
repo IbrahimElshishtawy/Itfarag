@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
 import '../widgets/hero_banner.dart';
-import '../widgets/category_chip.dart';
 import '../widgets/section.dart';
 import '../widgets/continue_watching_card.dart';
 import '../widgets/media_card.dart';
 import '../widgets/hero_shimmer.dart';
+import '../widgets/home_sliver_app_bar.dart';
+import '../widgets/category_selector.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Simulate real premium backend fetch API lag
     Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
         setState(() {
@@ -49,33 +48,7 @@ class _HomePageState extends State<HomePage> {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            // SliverAppBar with logo and notifications
-            SliverAppBar(
-              floating: true,
-              pinned: false,
-              backgroundColor: AppColors.darkBackground.withOpacity(0.8),
-              title: Text(
-                'ETFARAG',
-                style: AppTypography.heading2.copyWith(
-                  fontSize: 24,
-                  foreground: Paint()
-                    ..shader = LinearGradient(
-                      colors: AppColors.premiumGradient,
-                    ).createShader(const Rect.fromLTWH(0.0, 0.0, 150.0, 40.0)),
-                ),
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: const Icon(Icons.cast_connected_rounded, color: Colors.white),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            // Hero Banner
+            const HomeSliverAppBar(),
             SliverToBoxAdapter(
               child: _isLoading 
                   ? const HeroShimmer() 
@@ -94,29 +67,9 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
             ),
-            // Categories
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: SizedBox(
-                  height: 40,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    children: const [
-                      CategoryChip(label: 'All Content', isSelected: true),
-                      CategoryChip(label: 'Movies', isSelected: false),
-                      CategoryChip(label: 'Series', isSelected: false),
-                      CategoryChip(label: 'Anime', isSelected: false),
-                      CategoryChip(label: 'Shorts & Reels', isSelected: false),
-                      CategoryChip(label: 'Creator Hub', isSelected: false),
-                    ],
-                  ),
-                ),
-              ),
+            const SliverToBoxAdapter(
+              child: CategorySelector(),
             ),
-            // Continues Watching Section
             SliverToBoxAdapter(
               child: Section(
                 title: 'Continue Watching',
@@ -138,7 +91,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            // Recommended For You Section
             SliverToBoxAdapter(
               child: Section(
                 title: 'Recommended For You',
@@ -160,7 +112,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            // AI Personal Smart Feed Section
             SliverToBoxAdapter(
               child: Section(
                 title: 'AI Spark Feed (Customized For You)',
