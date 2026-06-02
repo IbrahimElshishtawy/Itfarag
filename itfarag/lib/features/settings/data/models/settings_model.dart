@@ -2,9 +2,9 @@ import '../../domain/entities/settings_entity.dart';
 
 class SettingsModel extends SettingsEntity {
   const SettingsModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory SettingsModel.fromJson(Map<String, dynamic> json) {
     return SettingsModel(

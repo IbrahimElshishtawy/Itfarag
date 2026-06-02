@@ -5,9 +5,9 @@ class VideoDescriptionSection extends StatelessWidget {
   final String description;
 
   const VideoDescriptionSection({
-    Key? key,
+    super.key,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

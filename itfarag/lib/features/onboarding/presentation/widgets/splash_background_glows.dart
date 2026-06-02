@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class SplashBackgroundGlows extends StatelessWidget {
-  const SplashBackgroundGlows({Key? key}) : super(key: key);
+  const SplashBackgroundGlows({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class SplashBackgroundGlows extends StatelessWidget {
       children: [
         // Dark gradient overlay to ensure text readability over the splash backdrop
         Container(
-          color: Colors.black.withOpacity(0.65),
+          color: Colors.black.withValues(alpha: 0.65),
         ),
         // Ambient premium backgrounds glow
         Positioned(
@@ -23,7 +23,7 @@ class SplashBackgroundGlows extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.accent.withOpacity(0.15),
+                  color: AppColors.accent.withValues(alpha: 0.15),
                   blurRadius: 100,
                   spreadRadius: 50,
                 ),
@@ -41,7 +41,7 @@ class SplashBackgroundGlows extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.secondary.withOpacity(0.12),
+                  color: AppColors.secondary.withValues(alpha: 0.12),
                   blurRadius: 80,
                   spreadRadius: 40,
                 ),

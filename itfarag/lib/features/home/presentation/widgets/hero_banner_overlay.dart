@@ -7,10 +7,10 @@ class HeroBannerOverlay extends StatelessWidget {
   final VoidCallback onMoreInfo;
 
   const HeroBannerOverlay({
-    Key? key,
+    super.key,
     required this.onWatchNow,
     required this.onMoreInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class HeroBannerOverlay extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.black.withOpacity(0.8),
-            Colors.black.withOpacity(0.2),
-            Colors.black.withOpacity(0.9),
+            Colors.black.withValues(alpha: 0.8),
+            Colors.black.withValues(alpha: 0.2),
+            Colors.black.withValues(alpha: 0.9),
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

@@ -5,9 +5,9 @@ class DownloadSpeedInfoCard extends StatelessWidget {
   final bool isDark;
 
   const DownloadSpeedInfoCard({
-    Key? key,
+    super.key,
     required this.isDark,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

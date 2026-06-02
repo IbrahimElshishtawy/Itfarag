@@ -6,7 +6,7 @@ import '../widgets/splash_background_glows.dart';
 import '../widgets/splash_logo_and_brand.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

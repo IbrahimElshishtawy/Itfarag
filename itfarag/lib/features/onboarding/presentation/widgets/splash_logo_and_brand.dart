@@ -4,7 +4,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 
 class SplashLogoAndBrand extends StatelessWidget {
-  const SplashLogoAndBrand({Key? key}) : super(key: key);
+  const SplashLogoAndBrand({super.key});
 
   @override
   Widget build(BuildContext context) {

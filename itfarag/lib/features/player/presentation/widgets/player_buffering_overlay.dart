@@ -5,9 +5,9 @@ class PlayerBufferingOverlay extends StatelessWidget {
   final bool isBuffering;
 
   const PlayerBufferingOverlay({
-    Key? key,
+    super.key,
     required this.isBuffering,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../widgets/search_result_tile.dart';
 import '../widgets/ai_search_response_card.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -77,14 +77,14 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
+                      borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: const BorderSide(color: AppColors.secondary),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.05),
+                    fillColor: Colors.white.withValues(alpha: 0.05),
                   ),
                   onSubmitted: (val) {
                     if (val.isNotEmpty) {

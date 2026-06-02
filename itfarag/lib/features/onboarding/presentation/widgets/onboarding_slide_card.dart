@@ -20,9 +20,9 @@ class OnboardingSlideCard extends StatelessWidget {
   final OnboardingSlide slide;
 
   const OnboardingSlideCard({
-    Key? key,
+    super.key,
     required this.slide,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +37,14 @@ class OnboardingSlideCard extends StatelessWidget {
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: slide.gradientColor.withOpacity(0.1),
+              color: slide.gradientColor.withValues(alpha: 0.1),
               border: Border.all(
-                color: slide.gradientColor.withOpacity(0.3),
+                color: slide.gradientColor.withValues(alpha: 0.3),
                 width: 2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: slide.gradientColor.withOpacity(0.2),
+                  color: slide.gradientColor.withValues(alpha: 0.2),
                   blurRadius: 40,
                   spreadRadius: 5,
                 ),

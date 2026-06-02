@@ -6,11 +6,11 @@ class PlayerVolumeAndSpecs extends StatelessWidget {
   final VoidCallback onFullscreenExit;
 
   const PlayerVolumeAndSpecs({
-    Key? key,
+    super.key,
     required this.currentVolume,
     required this.onVolumeToggle,
     required this.onFullscreenExit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

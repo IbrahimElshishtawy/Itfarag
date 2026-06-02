@@ -9,12 +9,12 @@ class ProfileHeaderCard extends StatelessWidget {
   final String avatarUrl;
 
   const ProfileHeaderCard({
-    Key? key,
+    super.key,
     required this.userName,
     required this.joinDate,
     required this.levelText,
     required this.avatarUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class ProfileHeaderCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.secondary.withOpacity(0.4),
+                      color: AppColors.secondary.withValues(alpha: 0.4),
                       blurRadius: 8,
                     ),
                   ],

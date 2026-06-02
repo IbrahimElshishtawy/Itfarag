@@ -7,11 +7,11 @@ class ShortsDescriptionPanel extends StatelessWidget {
   final String audio;
 
   const ShortsDescriptionPanel({
-    Key? key,
+    super.key,
     required this.creator,
     required this.description,
     required this.audio,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

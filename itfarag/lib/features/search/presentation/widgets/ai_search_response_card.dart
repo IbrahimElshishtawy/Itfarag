@@ -7,10 +7,10 @@ class AISearchResponseCard extends StatelessWidget {
   final String responseText;
 
   const AISearchResponseCard({
-    Key? key,
+    super.key,
     required this.isSearching,
     required this.responseText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

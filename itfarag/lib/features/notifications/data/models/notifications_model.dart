@@ -2,9 +2,9 @@ import '../../domain/entities/notifications_entity.dart';
 
 class NotificationsModel extends NotificationsEntity {
   const NotificationsModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     return NotificationsModel(

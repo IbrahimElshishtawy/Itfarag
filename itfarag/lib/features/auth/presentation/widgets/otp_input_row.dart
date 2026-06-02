@@ -6,10 +6,10 @@ class OtpInputRow extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   const OtpInputRow({
-    Key? key,
+    super.key,
     this.length = 6,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<OtpInputRow> createState() => _OtpInputRowState();
@@ -67,14 +67,14 @@ class _OtpInputRowState extends State<OtpInputRow> {
               counterText: '',
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
+                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: AppColors.secondary),
               ),
               filled: true,
-              fillColor: Colors.white.withOpacity(0.05),
+              fillColor: Colors.white.withValues(alpha: 0.05),
             ),
             onChanged: (val) => _onCodeChanged(val, index),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'category_chip.dart';
 
 class CategorySelector extends StatelessWidget {
-  const CategorySelector({Key? key}) : super(key: key);
+  const CategorySelector({super.key});
 
   @override
   Widget build(BuildContext context) {

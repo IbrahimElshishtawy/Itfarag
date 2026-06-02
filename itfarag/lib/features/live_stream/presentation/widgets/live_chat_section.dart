@@ -3,7 +3,7 @@ import 'live_chat_list.dart';
 import 'live_chat_input.dart';
 
 class LiveChatSection extends StatefulWidget {
-  const LiveChatSection({Key? key}) : super(key: key);
+  const LiveChatSection({super.key});
 
   @override
   State<LiveChatSection> createState() => _LiveChatSectionState();

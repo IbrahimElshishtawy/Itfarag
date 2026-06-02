@@ -8,7 +8,7 @@ import '../../../../core/shared/widgets/premium_button.dart';
 import 'developer_bypass_button.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -52,14 +52,14 @@ class _LoginFormState extends State<LoginForm> {
                 prefixIcon: const Icon(Icons.phone_iphone_rounded, color: AppColors.primary),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
+                  borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.05),
+                fillColor: Colors.white.withValues(alpha: 0.05),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -91,14 +91,14 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.white.withOpacity(0.15)),
+                  borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: AppColors.accent),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.05),
+                fillColor: Colors.white.withValues(alpha: 0.05),
               ),
               validator: (value) {
                 if (value == null || value.length < 6) {

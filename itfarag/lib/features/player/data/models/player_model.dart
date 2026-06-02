@@ -2,9 +2,9 @@ import '../../domain/entities/player_entity.dart';
 
 class PlayerModel extends PlayerEntity {
   const PlayerModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
     return PlayerModel(

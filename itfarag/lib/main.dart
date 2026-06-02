@@ -61,12 +61,12 @@ class EtfaragApp extends StatelessWidget {
               supportedLocales: const [
                 Locale('en'),
                 Locale('ar'),
-                Locale('fr'),
+                
               ],
               localizationsDelegates: const [
                 DefaultMaterialLocalizations.delegate,
                 DefaultWidgetsLocalizations.delegate,
-                DefaultCupertinoLocalizations.delegate,
+              
               ],
               routerConfig: appRouter,
             );

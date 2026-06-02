@@ -31,7 +31,7 @@ class TierPlanCard extends StatelessWidget {
               border: Border.all(color: color, width: 2.5),
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.15),
+                  color: color.withValues(alpha: 0.15),
                   blurRadius: 20,
                   spreadRadius: 2,
                 ),

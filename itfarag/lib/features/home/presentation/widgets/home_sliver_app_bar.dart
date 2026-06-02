@@ -3,14 +3,14 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
 class HomeSliverAppBar extends StatelessWidget {
-  const HomeSliverAppBar({Key? key}) : super(key: key);
+  const HomeSliverAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: true,
       pinned: false,
-      backgroundColor: AppColors.darkBackground.withOpacity(0.8),
+      backgroundColor: AppColors.darkBackground.withValues(alpha: 0.8),
       title: Text(
         'ETFARAG',
         style: AppTypography.heading2.copyWith(

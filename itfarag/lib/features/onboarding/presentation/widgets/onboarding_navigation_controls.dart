@@ -9,12 +9,12 @@ class OnboardingNavigationControls extends StatelessWidget {
   final VoidCallback onNextPressed;
 
   const OnboardingNavigationControls({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.slidesCount,
     required this.nextButtonText,
     required this.onNextPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class OnboardingNavigationControls extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: currentIndex == index
                       ? AppColors.primary
-                      : Colors.white.withOpacity(0.3),
+                      : Colors.white.withValues(alpha: 0.3),
                 ),
               ),
             ),

@@ -8,12 +8,12 @@ class LivePlayerOverlay extends StatelessWidget {
   final VoidCallback onTogglePlay;
 
   const LivePlayerOverlay({
-    Key? key,
+    super.key,
     required this.isInitialized,
     required this.isPlaying,
     required this.isBuffering,
     required this.onTogglePlay,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,10 +8,10 @@ class ShortsSidebarActions extends StatelessWidget {
   final String comments;
 
   const ShortsSidebarActions({
-    Key? key,
+    super.key,
     required this.likes,
     required this.comments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

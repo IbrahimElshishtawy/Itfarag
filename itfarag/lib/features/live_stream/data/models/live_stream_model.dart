@@ -2,9 +2,9 @@ import '../../domain/entities/live_stream_entity.dart';
 
 class LiveStreamModel extends LiveStreamEntity {
   const LiveStreamModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory LiveStreamModel.fromJson(Map<String, dynamic> json) {
     return LiveStreamModel(

@@ -7,10 +7,10 @@ class VideoActionRow extends StatelessWidget {
   final VoidCallback onDownloadPressed;
 
   const VideoActionRow({
-    Key? key,
+    super.key,
     required this.onPlayPressed,
     required this.onDownloadPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class VideoActionRow extends StatelessWidget {
         const SizedBox(width: 12),
         CircleAvatar(
           radius: 26,
-          backgroundColor: Colors.white.withOpacity(0.05),
+          backgroundColor: Colors.white.withValues(alpha: 0.05),
           child: IconButton(
             icon: const Icon(Icons.download_rounded, color: AppColors.secondary),
             onPressed: onDownloadPressed,

@@ -2,9 +2,9 @@ import '../../domain/entities/home_entity.dart';
 
 class HomeModel extends HomeEntity {
   const HomeModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
     return HomeModel(

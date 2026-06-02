@@ -2,9 +2,9 @@ import '../../domain/entities/shorts_entity.dart';
 
 class ShortsModel extends ShortsEntity {
   const ShortsModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory ShortsModel.fromJson(Map<String, dynamic> json) {
     return ShortsModel(

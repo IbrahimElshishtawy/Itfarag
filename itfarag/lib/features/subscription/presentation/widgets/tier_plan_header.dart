@@ -7,11 +7,11 @@ class TierPlanHeader extends StatelessWidget {
   final bool isPopular;
 
   const TierPlanHeader({
-    Key? key,
+    super.key,
     required this.name,
     required this.color,
     required this.isPopular,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

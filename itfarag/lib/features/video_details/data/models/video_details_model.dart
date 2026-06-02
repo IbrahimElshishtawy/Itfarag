@@ -2,9 +2,9 @@ import '../../domain/entities/video_details_entity.dart';
 
 class VideoDetailsModel extends VideoDetailsEntity {
   const VideoDetailsModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory VideoDetailsModel.fromJson(Map<String, dynamic> json) {
     return VideoDetailsModel(

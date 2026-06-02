@@ -6,7 +6,7 @@ import '../widgets/onboarding_slide_card.dart';
 import '../widgets/onboarding_navigation_controls.dart';
 
 class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({Key? key}) : super(key: key);
+  const OnboardingPage({super.key});
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -49,7 +49,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               gradient: LinearGradient(
                 colors: [
                   AppColors.darkBackgroundGradient[0],
-                  _slides[_currentIndex].gradientColor.withOpacity(0.08),
+                  _slides[_currentIndex].gradientColor.withValues(alpha: 0.08),
                   AppColors.darkBackgroundGradient[1],
                 ],
                 begin: Alignment.topCenter,

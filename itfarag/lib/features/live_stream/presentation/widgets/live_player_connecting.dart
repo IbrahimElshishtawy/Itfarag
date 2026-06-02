@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class LivePlayerConnecting extends StatelessWidget {
-  const LivePlayerConnecting({Key? key}) : super(key: key);
+  const LivePlayerConnecting({super.key});
 
   @override
   Widget build(BuildContext context) {

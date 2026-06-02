@@ -12,7 +12,7 @@ class SettingsGroupCard extends StatelessWidget {
   final ValueChanged<String?> onLanguageChanged;
 
   const SettingsGroupCard({
-    Key? key,
+    super.key,
     required this.isDark,
     required this.darkMode,
     required this.dataSaver,
@@ -20,7 +20,7 @@ class SettingsGroupCard extends StatelessWidget {
     required this.onDarkModeChanged,
     required this.onDataSaverChanged,
     required this.onLanguageChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class SettingsGroupCard extends StatelessWidget {
                 'Velvet midnight black interface style',
                 style: TextStyle(color: subTextColor, fontSize: 11),
               ),
-              activeColor: AppColors.primary,
+              activeThumbColor: AppColors.primary,
             ),
             Divider(color: dividerColor, height: 16),
             SwitchListTile(
@@ -62,7 +62,7 @@ class SettingsGroupCard extends StatelessWidget {
                 'Limits streams to 480p to reduce internet bills',
                 style: TextStyle(color: subTextColor, fontSize: 11),
               ),
-              activeColor: AppColors.secondary,
+              activeThumbColor: AppColors.secondary,
             ),
             Divider(color: dividerColor, height: 16),
             ListTile(

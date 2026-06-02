@@ -2,9 +2,9 @@ import '../../domain/entities/search_entity.dart';
 
 class SearchModel extends SearchEntity {
   const SearchModel({
-    required String id,
-    required String name,
-  }) : super(id: id, name: name);
+    required super.id,
+    required super.name,
+  });
 
   factory SearchModel.fromJson(Map<String, dynamic> json) {
     return SearchModel(

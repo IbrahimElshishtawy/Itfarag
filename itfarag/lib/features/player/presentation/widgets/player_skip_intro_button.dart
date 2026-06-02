@@ -6,10 +6,10 @@ class PlayerSkipIntroButton extends StatelessWidget {
   final VoidCallback onSkipIntro;
 
   const PlayerSkipIntroButton({
-    Key? key,
+    super.key,
     required this.currentPosition,
     required this.onSkipIntro,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

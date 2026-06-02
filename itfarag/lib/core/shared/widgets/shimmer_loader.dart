@@ -8,12 +8,12 @@ class ShimmerLoader extends StatelessWidget {
   final BoxShape shape;
 
   const ShimmerLoader({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     this.borderRadius = 8.0,
     this.shape = BoxShape.rectangle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
