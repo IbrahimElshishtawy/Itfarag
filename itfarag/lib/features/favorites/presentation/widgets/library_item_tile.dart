@@ -13,13 +13,15 @@ class LibraryItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.02),
+        color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.04)),
+        border: Border.all(color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.08)),
       ),
       child: Row(
         children: [
@@ -36,15 +38,22 @@ class LibraryItemTile extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   'The Galactic Core',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black87, 
+                    fontWeight: FontWeight.bold, 
+                    fontSize: 14,
+                  ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   '1h 45m remaining',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(
+                    color: isDark ? Colors.white54 : Colors.black54, 
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),

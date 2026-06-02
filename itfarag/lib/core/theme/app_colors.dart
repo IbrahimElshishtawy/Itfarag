@@ -39,4 +39,15 @@ class AppColors {
         const Color(0xFF09080C),
         const Color(0xFF151221),
       ];
+
+  static List<Color> getBackgroundGradient(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return isDark
+        ? darkBackgroundGradient
+        : [
+            const Color(0xFFF4F5FA),
+            const Color(0xFFE9EBF4),
+          ];
+  }
 }
+

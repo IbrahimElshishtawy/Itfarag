@@ -20,11 +20,13 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -35,8 +37,8 @@ class DetailsPage extends StatelessWidget {
             SliverAppBar(
               expandedHeight: 300,
               pinned: true,
-              iconTheme: const IconThemeData(color: Colors.white),
-              backgroundColor: AppColors.darkBackground,
+              iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black87),
+              backgroundColor: Theme.of(context).colorScheme.surface,
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   fit: StackFit.expand,
@@ -48,7 +50,7 @@ class DetailsPage extends StatelessWidget {
                     Container(
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Colors.black54, Colors.transparent, Colors.black],
+                          colors: [Colors.black54, Colors.transparent, Colors.black54],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),
@@ -68,7 +70,7 @@ class DetailsPage extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       'The Cyber Edge (ID: $id)',
-                      style: AppTypography.heading1.copyWith(color: Colors.white),
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(height: 12),
                     VideoActionRow(
@@ -87,7 +89,7 @@ class DetailsPage extends StatelessWidget {
                     const SizedBox(height: 24),
                     Text(
                       'Featured Cast',
-                      style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 16),
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
                     ),
                     const SizedBox(height: 12),
                     SizedBox(

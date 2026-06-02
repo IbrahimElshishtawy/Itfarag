@@ -47,7 +47,7 @@ class _SearchPageState extends State<SearchPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -61,30 +61,30 @@ class _SearchPageState extends State<SearchPage> {
                 const SizedBox(height: 16),
                 Text(
                   'Smart AI Search',
-                  style: AppTypography.heading2.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: _searchController,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black87),
                   decoration: InputDecoration(
                     hintText: 'Search by title, genre, or mood...',
-                    hintStyle: const TextStyle(color: Colors.white54),
+                    hintStyle: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Colors.black54),
                     prefixIcon: const Icon(Icons.search_rounded, color: AppColors.secondary),
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.mic_none_rounded, color: Colors.white70),
+                      icon: Icon(Icons.mic_none_rounded, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54),
                       onPressed: () => _triggerAISmartMoodSearch('Action thriller with huge plot twists'),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
+                      borderSide: BorderSide(color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.15)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: const BorderSide(color: AppColors.secondary),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withValues(alpha: 0.05),
+                    fillColor: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.05),
                   ),
                   onSubmitted: (val) {
                     if (val.isNotEmpty) {
@@ -99,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 Text(
                   'Popular Suggestions',
-                  style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 18),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
                 ),
                 const SizedBox(height: 12),
                 Wrap(

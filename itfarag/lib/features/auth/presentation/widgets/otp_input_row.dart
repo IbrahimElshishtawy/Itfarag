@@ -50,6 +50,8 @@ class _OtpInputRowState extends State<OtpInputRow> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(
@@ -62,19 +64,19 @@ class _OtpInputRowState extends State<OtpInputRow> {
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             maxLength: 1,
-            style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontSize: 20, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               counterText: '',
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
+                borderSide: BorderSide(color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.15)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: AppColors.secondary),
               ),
               filled: true,
-              fillColor: Colors.white.withValues(alpha: 0.05),
+              fillColor: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.05),
             ),
             onChanged: (val) => _onCodeChanged(val, index),
           ),

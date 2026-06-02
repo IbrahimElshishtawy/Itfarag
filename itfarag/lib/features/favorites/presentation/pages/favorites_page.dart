@@ -13,7 +13,7 @@ class FavoritesPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -28,14 +28,17 @@ class FavoritesPage extends StatelessWidget {
                 // Heading
                 Text(
                   'My Library & Saved',
-                  style: AppTypography.heading2.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 24),
                 // Custom Playlists Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Custom Playlists', style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 18)),
+                    Text(
+                      'Custom Playlists', 
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
+                    ),
                     TextButton.icon(
                       icon: const Icon(Icons.add, size: 16, color: AppColors.secondary),
                       label: const Text('New List', style: TextStyle(color: AppColors.secondary)),
@@ -58,7 +61,10 @@ class FavoritesPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 // Watch Later list
-                Text('Watch Later', style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 18)),
+                Text(
+                  'Watch Later', 
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 18),
+                ),
                 const SizedBox(height: 12),
                 Expanded(
                   child: ListView.builder(

@@ -29,6 +29,12 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : Colors.black87;
+    final labelColor = isDark ? Colors.white60 : Colors.black54;
+    final borderColor = (isDark ? Colors.white : Colors.black).withValues(alpha: 0.15);
+    final fillColor = (isDark ? Colors.white : Colors.black).withValues(alpha: 0.05);
+
     return GlassCard(
       borderRadius: 24,
       padding: const EdgeInsets.all(24.0),
@@ -39,27 +45,27 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             Text(
               'Sign In',
-              style: AppTypography.heading2.copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 24),
             // Phone/Email Field
             TextFormField(
               controller: _phoneController,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: textColor),
               decoration: InputDecoration(
                 labelText: 'Phone Number or Email',
-                labelStyle: const TextStyle(color: Colors.white60),
+                labelStyle: TextStyle(color: labelColor),
                 prefixIcon: const Icon(Icons.phone_iphone_rounded, color: AppColors.primary),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
+                  borderSide: BorderSide(color: borderColor),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: AppColors.primary),
                 ),
                 filled: true,
-                fillColor: Colors.white.withValues(alpha: 0.05),
+                fillColor: fillColor,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -73,15 +79,15 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               controller: _passwordController,
               obscureText: _obscurePassword,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: textColor),
               decoration: InputDecoration(
                 labelText: 'Password',
-                labelStyle: const TextStyle(color: Colors.white60),
+                labelStyle: TextStyle(color: labelColor),
                 prefixIcon: const Icon(Icons.lock_rounded, color: AppColors.accent),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscurePassword ? Icons.visibility_off_rounded : Icons.visibility_rounded,
-                    color: Colors.white60,
+                    color: labelColor,
                   ),
                   onPressed: () {
                     setState(() {
@@ -91,14 +97,14 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.15)),
+                  borderSide: BorderSide(color: borderColor),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: AppColors.accent),
                 ),
                 filled: true,
-                fillColor: Colors.white.withValues(alpha: 0.05),
+                fillColor: fillColor,
               ),
               validator: (value) {
                 if (value == null || value.length < 6) {

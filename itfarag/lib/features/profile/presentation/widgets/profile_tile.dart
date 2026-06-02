@@ -18,17 +18,36 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Material(
       color: Colors.transparent,
       child: ListTile(
         leading: CircleAvatar(
           radius: 16,
-          backgroundColor: Colors.white.withOpacity(0.05),
-          child: Icon(icon, color: Colors.white70, size: 18),
+          backgroundColor: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.05),
+          child: Icon(icon, color: isDark ? Colors.white70 : Colors.black87, size: 18),
         ),
-        title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
-        subtitle: Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 11)),
-        trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30, size: 14),
+        title: Text(
+          title, 
+          style: TextStyle(
+            color: isDark ? Colors.white : Colors.black87, 
+            fontSize: 14, 
+            fontWeight: FontWeight.bold
+          )
+        ),
+        subtitle: Text(
+          subtitle, 
+          style: TextStyle(
+            color: isDark ? Colors.white54 : Colors.black54, 
+            fontSize: 11
+          )
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded, 
+          color: isDark ? Colors.white30 : Colors.black38, 
+          size: 14
+        ),
         onTap: onTap,
       ),
     );

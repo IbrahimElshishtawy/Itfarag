@@ -39,7 +39,7 @@ class LoginHeader extends StatelessWidget {
         Text(
           'Unlock unlimited movies, series, and Watch Parties',
           textAlign: TextAlign.center,
-          style: AppTypography.bodySmall.copyWith(color: Colors.white54),
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );

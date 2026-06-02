@@ -7,10 +7,13 @@ class HomeSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final iconColor = isDark ? Colors.white : Colors.black87;
+
     return SliverAppBar(
       floating: true,
       pinned: false,
-      backgroundColor: AppColors.darkBackground.withValues(alpha: 0.8),
+      backgroundColor: (isDark ? AppColors.darkBackground : AppColors.lightBackground).withValues(alpha: 0.8),
       title: Text(
         'ETFARAG',
         style: AppTypography.heading2.copyWith(
@@ -23,11 +26,11 @@ class HomeSliverAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
+          icon: Icon(Icons.notifications_none_rounded, color: iconColor),
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.cast_connected_rounded, color: Colors.white),
+          icon: Icon(Icons.cast_connected_rounded, color: iconColor),
           onPressed: () {},
         ),
       ],

@@ -25,15 +25,17 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black87),
       ),
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -47,13 +49,13 @@ class _OtpPageState extends State<OtpPage> {
               children: [
                 Text(
                   'Verify Your Account',
-                  style: AppTypography.heading1.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineLarge,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Enter the 6-digit MFA security code sent to your phone number: ${widget.phone}',
-                  style: AppTypography.bodyMedium.copyWith(color: Colors.white70),
+                  style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48),

@@ -14,11 +14,14 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final dividerColor = isDark ? Colors.white12 : Colors.black12;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -73,7 +76,7 @@ class ProfilePage extends StatelessWidget {
                           context.pushNamed(RouteNames.subscription);
                         },
                       ),
-                      const Divider(color: Colors.white12, height: 16),
+                      Divider(color: dividerColor, height: 16),
                       ProfileTile(
                         icon: Icons.settings_rounded,
                         title: 'Settings & Privacy',
@@ -82,7 +85,7 @@ class ProfilePage extends StatelessWidget {
                           context.pushNamed(RouteNames.settings);
                         },
                       ),
-                      const Divider(color: Colors.white12, height: 16),
+                      Divider(color: dividerColor, height: 16),
                       ProfileTile(
                         icon: Icons.dashboard_customize_rounded,
                         title: 'Creator Analytics Dashboard',

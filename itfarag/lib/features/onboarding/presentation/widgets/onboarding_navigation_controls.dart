@@ -38,7 +38,7 @@ class OnboardingNavigationControls extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   color: currentIndex == index
                       ? AppColors.primary
-                      : Colors.white.withValues(alpha: 0.3),
+                      : (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.3),
                 ),
               ),
             ),

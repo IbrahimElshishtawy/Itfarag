@@ -63,14 +63,14 @@ class ProfileHeaderCard extends StatelessWidget {
         Center(
           child: Text(
             userName,
-            style: AppTypography.heading2.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         const SizedBox(height: 4),
         Center(
           child: Text(
             joinDate,
-            style: AppTypography.bodySmall.copyWith(color: Colors.white54),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
       ],

@@ -16,12 +16,12 @@ class VideoDescriptionSection extends StatelessWidget {
       children: [
         Text(
           'Description',
-          style: AppTypography.heading3.copyWith(color: Colors.white, fontSize: 16),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
         ),
         const SizedBox(height: 8),
         Text(
           description,
-          style: const TextStyle(color: Colors.white70, height: 1.4, fontSize: 13),
+          style: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87, height: 1.4, fontSize: 13),
         ),
       ],
     );

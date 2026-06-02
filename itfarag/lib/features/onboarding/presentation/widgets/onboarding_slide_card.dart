@@ -66,16 +66,13 @@ class OnboardingSlideCard extends StatelessWidget {
                 Text(
                   slide.title,
                   textAlign: TextAlign.center,
-                  style: AppTypography.heading2.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   slide.description,
                   textAlign: TextAlign.center,
-                  style: AppTypography.bodyMedium.copyWith(
-                    color: Colors.white70,
-                    height: 1.5,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),

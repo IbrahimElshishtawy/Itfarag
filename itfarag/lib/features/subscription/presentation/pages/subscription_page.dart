@@ -10,14 +10,13 @@ class SubscriptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Subscription Plans', style: TextStyle(color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text('Subscription Plans'),
       ),
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: AppColors.darkBackgroundGradient,
+            colors: AppColors.getBackgroundGradient(context),
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -32,13 +31,13 @@ class SubscriptionPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   'Choose Your Premium Tier',
-                  style: AppTypography.heading2.copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Join ETFARAG premium to unlock 4K HDR streams, offline secure downloads, and unlimited interactive Watch Parties.',
-                  style: AppTypography.bodySmall.copyWith(color: Colors.white60),
+                  style: Theme.of(context).textTheme.bodySmall,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),

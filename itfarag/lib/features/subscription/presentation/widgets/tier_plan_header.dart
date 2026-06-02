@@ -20,7 +20,7 @@ class TierPlanHeader extends StatelessWidget {
       children: [
         Text(
           name,
-          style: AppTypography.heading3.copyWith(color: Colors.white),
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         if (isPopular)
           Container(

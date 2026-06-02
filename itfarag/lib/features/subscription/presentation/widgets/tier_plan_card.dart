@@ -61,7 +61,7 @@ class TierPlanCard extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               description,
-              style: AppTypography.bodySmall.copyWith(color: Colors.white70),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 24),
             PremiumButton(

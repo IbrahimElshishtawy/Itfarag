@@ -78,9 +78,7 @@ class _LivePageState extends State<LivePage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final dividerColor = isDark ? Colors.white12 : Colors.black12;
     
-    final bgGradient = isDark 
-        ? AppColors.darkBackgroundGradient 
-        : [const Color(0xFFF2F3F8), const Color(0xFFE3E5EE)];
+    final bgGradient = AppColors.getBackgroundGradient(context);
 
     return Scaffold(
       body: Container(

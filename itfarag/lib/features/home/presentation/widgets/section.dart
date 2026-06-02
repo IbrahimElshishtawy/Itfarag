@@ -30,10 +30,14 @@ class Section extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: AppTypography.heading3.copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.white54),
+                icon: Icon(
+                  Icons.arrow_forward_ios_rounded, 
+                  size: 16, 
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Colors.black54
+                ),
                 onPressed: () {},
               ),
             ],

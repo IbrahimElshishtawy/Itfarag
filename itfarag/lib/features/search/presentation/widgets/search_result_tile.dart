@@ -6,13 +6,15 @@ class SearchResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.03),
+        color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: (isDark ? Colors.white : Colors.black).withValues(alpha: 0.05)),
       ),
       child: Row(
         children: [
@@ -27,25 +29,25 @@ class SearchResultTile extends StatelessWidget {
                 return Container(
                   width: 80,
                   height: 50,
-                  color: Colors.white12,
-                  child: const Icon(Icons.movie_creation_outlined, color: Colors.white24, size: 20),
+                  color: isDark ? Colors.white12 : Colors.black12,
+                  child: Icon(Icons.movie_creation_outlined, color: isDark ? Colors.white24 : Colors.black26, size: 20),
                 );
               },
             ),
           ),
           const SizedBox(width: 16),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'The Cyberpunk Chronicle',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                  style: TextStyle(color: isDark ? Colors.white : Colors.black87, fontWeight: FontWeight.bold, fontSize: 14),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   'Sci-Fi Thriller • 2026',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(color: isDark ? Colors.white54 : Colors.black54, fontSize: 12),
                 ),
               ],
             ),

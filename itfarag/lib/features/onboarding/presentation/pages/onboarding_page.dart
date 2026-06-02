@@ -48,9 +48,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.darkBackgroundGradient[0],
+                  AppColors.getBackgroundGradient(context)[0],
                   _slides[_currentIndex].gradientColor.withValues(alpha: 0.08),
-                  AppColors.darkBackgroundGradient[1],
+                  AppColors.getBackgroundGradient(context)[1],
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
