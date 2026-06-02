@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../widgets/playlist_card.dart';
 import '../widgets/library_item_tile.dart';
 

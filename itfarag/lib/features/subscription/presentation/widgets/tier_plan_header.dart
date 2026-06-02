@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_typography.dart';
 
 class TierPlanHeader extends StatelessWidget {
   final String name;

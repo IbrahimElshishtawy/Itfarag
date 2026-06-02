@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../widgets/mood_suggestion_tag.dart';
 import '../widgets/search_result_tile.dart';
 import '../widgets/ai_search_response_card.dart';

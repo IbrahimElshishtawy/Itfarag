@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/routes/route_names.dart';
 import '../widgets/cast_list_item.dart';
 import '../widgets/video_specs_row.dart';

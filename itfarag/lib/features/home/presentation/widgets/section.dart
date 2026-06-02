@@ -1,7 +1,6 @@
 // ignore_for_file: use_super_parameters
 
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/shimmer_loader.dart';
 
 class Section extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 
 class OnboardingSlide {

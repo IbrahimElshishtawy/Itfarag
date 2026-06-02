@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 import '../../../../core/shared/widgets/premium_button.dart';
 import '../widgets/otp_input_row.dart';
