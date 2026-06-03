@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/config/env.dart';
 import 'core/config/constants.dart';
 import 'core/theme/app_theme.dart';
@@ -64,9 +65,9 @@ class EtfaragApp extends StatelessWidget {
                 
               ],
               localizationsDelegates: const [
-                DefaultMaterialLocalizations.delegate,
-                DefaultWidgetsLocalizations.delegate,
-              
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
               ],
               routerConfig: appRouter,
             );
