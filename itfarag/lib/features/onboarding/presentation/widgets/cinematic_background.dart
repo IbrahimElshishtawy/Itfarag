@@ -147,7 +147,7 @@ class _MovingColumnState extends State<_MovingColumn> with SingleTickerProviderS
   @override
   void dispose() {
     _controller.dispose();
-    super.initState();
+    super.dispose();
   }
 
   @override

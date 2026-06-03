@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LanguageManager extends ValueNotifier<Locale> {
-  LanguageManager() : super(const Locale('ar')); // Default to Arabic
+  LanguageManager() : super(const Locale('en')); // Default to English
 
   void changeLanguage(String languageCode) {
     value = Locale(languageCode);
