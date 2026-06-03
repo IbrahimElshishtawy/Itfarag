@@ -1,30 +1,26 @@
-// ignore_for_file: use_super_parameters
-
-import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/shared/widgets/glass_card.dart';
+import 'media_item.dart';
 
 class MediaCard extends StatelessWidget {
-  final int index;
+  final MediaItem item;
   final bool isAISuggestion;
   final VoidCallback onTap;
 
   const MediaCard({
     Key? key,
-    required this.index,
+    required this.item,
     required this.onTap,
     this.isAISuggestion = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final urls = [
-      'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=60',
-    ];
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    final title = isArabic ? item.titleAr : item.title;
+    final genre = isArabic ? item.genreAr : item.genre;
+    final ratingText = isArabic ? '★ ${item.rating} | $genre' : '★ ${item.rating} | $genre';
+
+    // Generates a mock match percentage for AI recommendations
+    final int mockMatch = 95 + (item.title.hashCode % 5);
 
     return GestureDetector(
       onTap: onTap,
@@ -36,12 +32,12 @@ class MediaCard extends StatelessWidget {
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(18),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
                     Image.network(
-                      urls[index % urls.length],
+                      item.imageUrl,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
@@ -61,16 +57,26 @@ class MediaCard extends StatelessWidget {
                     if (isAISuggestion)
                       Positioned(
                         top: 8,
-                        left: 8,
+                        left: isArabic ? null : 8,
+                        right: isArabic ? 8 : null,
                         child: GlassCard(
-                          borderRadius: 6,
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                          fillOpacity: 0.3,
+                          borderRadius: 8,
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                          fillOpacity: 0.25,
+                          borderOpacity: 0.15,
                           child: Row(
-                            children: const [
-                              Icon(Icons.psychology, color: AppColors.secondary, size: 10),
-                              SizedBox(width: 2),
-                              Text('98%', style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.white)),
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.psychology, color: AppColors.secondary, size: 12),
+                              const SizedBox(width: 3),
+                              Text(
+                                '$mockMatch%',
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -80,16 +86,25 @@ class MediaCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Show/Movie Name',
-              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.2,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 2),
-            const Text(
-              '★ 4.8 | Sci-Fi',
-              style: TextStyle(color: Colors.white54, fontSize: 10),
+            const SizedBox(height: 3),
+            Text(
+              ratingText,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.55),
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

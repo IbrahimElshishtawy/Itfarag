@@ -1,27 +1,46 @@
 import 'package:flutter/material.dart';
 import 'category_chip.dart';
 
-class CategorySelector extends StatelessWidget {
+class CategorySelector extends StatefulWidget {
   const CategorySelector({super.key});
 
   @override
+  State<CategorySelector> createState() => _CategorySelectorState();
+}
+
+class _CategorySelectorState extends State<CategorySelector> {
+  int _selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
+    final List<String> labels = isArabic
+        ? ['كل المحتوى', 'الأفلام', 'المسلسلات', 'الأنمي', 'فيديوهات قصيرة', 'صناع المحتوى']
+        : ['All Content', 'Movies', 'Series', 'Anime', 'Shorts & Reels', 'Creator Hub'];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
-        height: 40,
-        child: ListView(
+        height: 42,
+        child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: const [
-            CategoryChip(label: 'All Content', isSelected: true),
-            CategoryChip(label: 'Movies', isSelected: false),
-            CategoryChip(label: 'Series', isSelected: false),
-            CategoryChip(label: 'Anime', isSelected: false),
-            CategoryChip(label: 'Shorts & Reels', isSelected: false),
-            CategoryChip(label: 'Creator Hub', isSelected: false),
-          ],
+          itemCount: labels.length,
+          itemBuilder: (context, index) {
+            return CategoryChip(
+              label: labels[index],
+              isSelected: _selectedIndex == index,
+              onSelected: (selected) {
+                if (selected) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                }
+              },
+            );
+          },
         ),
       ),
     );
