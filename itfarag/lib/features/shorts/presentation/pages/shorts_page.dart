@@ -1,6 +1,7 @@
 // ignore_for_file: use_super_parameters
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../widgets/shorts_video_card.dart';
 
 class ShortsPage extends StatefulWidget {
@@ -52,29 +53,61 @@ class _ShortsPageState extends State<ShortsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: PageView.builder(
-        controller: _pageController,
-        scrollDirection: Axis.vertical,
-        onPageChanged: (index) {
-          setState(() {
-            _focusedIndex = index;
-          });
-        },
-        itemCount: _shortsData.length,
-        itemBuilder: (context, index) {
-          final data = _shortsData[index];
-          final isFocused = index == _focusedIndex;
-          
-          return ShortsVideoCard(
-            videoUrl: data['url']!,
-            creator: data['creator']!,
-            description: data['description']!,
-            audio: data['audio']!,
-            likes: data['likes']!,
-            comments: data['comments']!,
-            isFocused: isFocused,
-          );
-        },
+      body: Stack(
+        children: [
+          PageView.builder(
+            controller: _pageController,
+            scrollDirection: Axis.vertical,
+            onPageChanged: (index) {
+              setState(() {
+                _focusedIndex = index;
+              });
+            },
+            itemCount: _shortsData.length,
+            itemBuilder: (context, index) {
+              final data = _shortsData[index];
+              final isFocused = index == _focusedIndex;
+              
+              return ShortsVideoCard(
+                videoUrl: data['url']!,
+                creator: data['creator']!,
+                description: data['description']!,
+                audio: data['audio']!,
+                likes: data['likes']!,
+                comments: data['comments']!,
+                isFocused: isFocused,
+              );
+            },
+          ),
+          // Premium floating semi-transparent back button
+          Positioned(
+            top: 0,
+            left: 0,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.black.withOpacity(0.4),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/home');
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

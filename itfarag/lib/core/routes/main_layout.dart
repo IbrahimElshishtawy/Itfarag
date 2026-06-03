@@ -74,30 +74,36 @@ class MainLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    // Hide bottom navigation bar on shorts page to allow full screen playback and scrolling gestures
+    final String location = GoRouterState.of(context).matchedLocation;
+    final bool showNavBar = !location.startsWith('/shorts');
 
     return Scaffold(
       extendBody: true,
       body: child,
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 22),
-        child: GlassCard(
-          borderRadius: 24, // Beautiful premium smooth curves
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-          fillOpacity: isDark ? 0.08 : 0.45,
-          borderOpacity: isDark ? 0.15 : 0.08,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(0, Icons.home_filled, selectedIndex, context),
-              _buildNavItem(1, Icons.search_rounded, selectedIndex, context),
-              _buildNavItem(2, Icons.play_circle_outline_rounded, selectedIndex, context),
-              _buildNavItem(3, Icons.live_tv_rounded, selectedIndex, context),
-              _buildNavItem(4, Icons.video_library_rounded, selectedIndex, context),
-              _buildNavItem(5, Icons.person_rounded, selectedIndex, context),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: showNavBar
+          ? Container(
+              margin: const EdgeInsets.only(left: 16, right: 16, bottom: 22),
+              child: GlassCard(
+                borderRadius: 24, // Beautiful premium smooth curves
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                fillOpacity: isDark ? 0.08 : 0.45,
+                borderOpacity: isDark ? 0.15 : 0.08,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildNavItem(0, Icons.home_filled, selectedIndex, context),
+                    _buildNavItem(1, Icons.search_rounded, selectedIndex, context),
+                    _buildNavItem(2, Icons.play_circle_outline_rounded, selectedIndex, context),
+                    _buildNavItem(3, Icons.live_tv_rounded, selectedIndex, context),
+                    _buildNavItem(4, Icons.video_library_rounded, selectedIndex, context),
+                    _buildNavItem(5, Icons.person_rounded, selectedIndex, context),
+                  ],
+                ),
+              ),
+            )
+          : null,
     );
   }
 }
