@@ -1,4 +1,5 @@
-import 'dart:math' as math;
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../../../core/shared/widgets/glass_card.dart';
 
