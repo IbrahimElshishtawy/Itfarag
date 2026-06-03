@@ -23,17 +23,22 @@ class Section extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 24, bottom: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0).copyWith(top: 24, bottom: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -0.5,
+                ),
               ),
               IconButton(
                 icon: Icon(
-                  Icons.arrow_forward_ios_rounded, 
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.arrow_back_ios_rounded
+                      : Icons.arrow_forward_ios_rounded, 
                   size: 16, 
                   color: Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Colors.black54
                 ),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import '../../../../core/theme/app_colors.dart';
 import 'media_item.dart';
 
 class ContinueWatchingCard extends StatelessWidget {

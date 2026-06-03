@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/shared/widgets/glass_card.dart';
 import 'media_item.dart';
 
 class MediaCard extends StatelessWidget {
